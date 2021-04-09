@@ -11,9 +11,6 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(
         _('Phone number'), unique=True, max_length=20
     )
-    birthday = models.DateField(
-        _('Birthday'), auto_now=False, null=True, blank=True
-    )
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
