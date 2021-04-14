@@ -21,12 +21,14 @@ urlpatterns = [
         PasswordChangeView.as_view(
             template_name='pages/change-password.html',
             success_url=reverse_lazy('change-password-done_page')),
-        name='change-password_page'),
+        name='change-password_page'
+    ),
     path(
         'change-password-done/',
         PasswordChangeDoneView.as_view(
             template_name='pages/change-password-done.html'),
-        name='change-password-done_page'),
+        name='change-password-done_page'
+    ),
     path('change-number-submit/', ChangeNumberSubmitView.as_view(), name='change-num-submit_page'),
     path('change-number/', ChangeNumberView.as_view(), name='change-num_page'),
     path('log-out/', LogoutView.as_view(next_page='/'), name='log-out'),
