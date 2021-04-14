@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from .user_manager import UserManager
+from .user_manager import CustomUserManager
 
 
 class CustomUser(AbstractUser):
@@ -15,4 +16,10 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.phone_number
+
+    def get_absolute_url(self):
+        return reverse("edit-profile", args=[str(self.id)])
