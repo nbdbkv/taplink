@@ -1,17 +1,29 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.generic import TemplateView, FormView
 
-from apps.users.forms import EditProfileForm
+from apps.users.forms import EditProfileForm, RegistrationNumberForm
+from apps.users.models import CustomUser
 
 
 class RegistrationView(TemplateView):
     template_name = 'pages/registration.html'
 
 
-class RegistrationNumberView(TemplateView):
+class RegistrationNumberView(FormView):
+    form_class = RegistrationNumberForm
     template_name = 'pages/registration-number.html'
+
+
+def validate_phone_number(request):
+    phone_number = request.GET.get('phone_number', None)
+    data = {
+        'is_taken': CustomUser.objects.filter(phone_number__iexact=phone_number).exists()
+    }
+    if data['is_taken']:
+        data['error_message'] = 'A user with this username already exists.'
+    return JsonResponse(data)
 
 
 class RegistrationSubmitView(TemplateView):

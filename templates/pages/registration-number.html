@@ -11,14 +11,17 @@
 
     <div class="box__wrap">
         <div class="form__box">
-            <form action="">
+            <form action="" method="post">
+                {% csrf_token %}
                 <div class="form__box-head">
                     <h2 class="form__title">
                         Для продолжения, введите номер телефона
                     </h2>
                 </div>
+{#                {{ form.as_p }}#}
+                <br>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input form__input-tel" required>
+                    <input type="text" name="phone_number" class="form__input form__input-tel" required>
                 </label>
                 <button onclick="getNumber()" class="form__btn" type="submit">
                     Отправить код

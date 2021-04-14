@@ -21,3 +21,9 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('first_name', 'last_name')
+
+
+class RegistrationNumberForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('phone_number',)
