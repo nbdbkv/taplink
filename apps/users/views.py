@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, FormView
 
-from apps.users.forms import ProfileEditForm
+from apps.users.forms import EditProfileForm
 
 
 class RegistrationView(TemplateView):
@@ -18,8 +18,8 @@ class RegistrationSubmitView(TemplateView):
     template_name = 'pages/registration-submit.html'
 
 
-class ProfileEditFormView(LoginRequiredMixin, FormView):
-    form_class = ProfileEditForm
+class EditProfileFormView(LoginRequiredMixin, FormView):
+    form_class = EditProfileForm
     template_name = 'pages/edit-profile.html'
 
     def form_valid(self, form):

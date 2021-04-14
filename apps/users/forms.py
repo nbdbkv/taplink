@@ -17,7 +17,7 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('first_name', 'last_name')
 
 
-class ProfileEditForm(forms.ModelForm):
+class EditProfileForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('first_name', 'last_name')

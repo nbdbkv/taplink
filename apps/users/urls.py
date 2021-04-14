@@ -5,7 +5,7 @@ from django.urls import path, reverse_lazy
 
 from .views import (
     RegistrationView, RegistrationNumberView, RegistrationSubmitView,
-    ProfileEditFormView, ChangeNumberSubmitView, ChangeNumberView,
+    EditProfileFormView, ChangeNumberSubmitView, ChangeNumberView,
     IndexView
 )
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('registration-submit/',
          RegistrationSubmitView.as_view(), name='registration-submit_page'),
     path('edit-profile/<int:pk>/',
-         ProfileEditFormView.as_view(), name='edit-profile'),
+         EditProfileFormView.as_view(), name='edit-profile'),
     path('change-password/',
          PasswordChangeView.as_view(
              template_name='pages/change-password.html',
