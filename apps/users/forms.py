@@ -21,9 +21,3 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('first_name', 'last_name')
-
-#
-# class ChangePasswordForm(forms.ModelForm):
-#     class Meta:
-#         model = get_user_model()
-#         fields = ['old_password', 'new_password1', 'new_password2']
