@@ -6,12 +6,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-<<<<<<< HEAD
     path('', include('apps.users.urls')),
-=======
-    path('templates/', include('apps.templates_app.urls')),
->>>>>>> fe759124b250b6ed89b3c3ce0ed0ce91386ac312
 ]
 
 if settings.DEBUG:

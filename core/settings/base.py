@@ -17,10 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.templates_app',
-<<<<<<< HEAD
     'apps.users',
-=======
->>>>>>> fe759124b250b6ed89b3c3ce0ed0ce91386ac312
+
 ]
 
 MIDDLEWARE = [
@@ -101,12 +99,9 @@ except ImportError:
         from .prod import *
     except ImportError:
         logging.error('core.settings.prod.py file not found !')
-<<<<<<< HEAD
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-=======
->>>>>>> fe759124b250b6ed89b3c3ce0ed0ce91386ac312
