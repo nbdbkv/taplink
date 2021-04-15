@@ -39,7 +39,7 @@
                 <label class="form__input-wrap">
                     <input type="text" class="form__input" placeholder="Введите код подтверждения" required>
                 </label>
-                <button class="form__btn" type="submit">
+                <button class="form__btn" onclick="sendConfirmCode()" type="submit">
                     Отправить код
                 </button>
                 <a href="" class="no__sms">
@@ -54,4 +54,6 @@
 
 {% endblock %}
 
-{% block scripts %}{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/registration-number.js' %}"></script>
+{% endblock %}
