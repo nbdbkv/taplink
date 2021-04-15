@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import (
+    LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+)
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView
@@ -18,6 +20,14 @@ class RegistrationNumberView(FormView):
 
 class RegistrationSubmitView(TemplateView):
     template_name = 'pages/registration-submit.html'
+
+
+class _LoginView(LoginView):
+    template_name = 'pages/sign-in.html'
+
+
+class _LogoutView(LogoutView):
+    next_page = '/'
 
 
 class EditProfileFormView(LoginRequiredMixin, FormView):
