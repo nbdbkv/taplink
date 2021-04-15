@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView
 
 from apps.users.forms import EditProfileForm, RegistrationNumberForm
-from apps.users.models import CustomUser
 
 
 class RegistrationView(TemplateView):
@@ -14,16 +14,6 @@ class RegistrationView(TemplateView):
 class RegistrationNumberView(FormView):
     form_class = RegistrationNumberForm
     template_name = 'pages/registration-number.html'
-
-
-def validate_phone_number(request):
-    phone_number = request.GET.get('phone_number', None)
-    data = {
-        'is_taken': CustomUser.objects.filter(phone_number__iexact=phone_number).exists()
-    }
-    if data['is_taken']:
-        data['error_message'] = 'A user with this username already exists.'
-    return JsonResponse(data)
 
 
 class RegistrationSubmitView(TemplateView):
@@ -42,6 +32,15 @@ class EditProfileFormView(LoginRequiredMixin, FormView):
         return HttpResponseRedirect(
             reverse('edit-profile', kwargs={'pk': self.request.user.pk})
         )
+
+
+class _PasswordChangeView(PasswordChangeView):
+    template_name = 'pages/change-password.html'
+    success_url = reverse_lazy('change-password-done_page')
+
+
+class _PasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'pages/change-password-done.html'
 
 
 class ChangeNumberSubmitView(TemplateView):
