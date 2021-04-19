@@ -1,58 +1,56 @@
-console.log("hello")
+const p = document.querySelector('p');
+let userPhoneNumberGlobal = ""
 
-window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("sign-in-button", {
     'size': 'invisible',
     'callback': (response) => {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
         onSignInSubmit();
     }
 });
 
-function validateNumber() {
-    let countryCode = document.getElementsByClassName("iti__selected-dial-code")[0].innerText;
+let appVerifier = window.recaptchaVerifier;
+
+validateNumber = () => {
+    let countryCode = document.getElementsByClassName("iti__selected-dial-code")[0].innerHTML;
     let inputNumber = document.getElementsByClassName("form__input form__input-tel").item(0).value;
-    let phoneNumber = countryCode + " " + inputNumber
-    let phone_number = document.getElementsByClassName('form__input form__input-tel').item(0).value = phoneNumber.replace(/\s+/g, "")
+    let formNumber = countryCode + inputNumber
+    let phoneNumber = formNumber.replace(/\s+/g, "")
+    userPhoneNumberGlobal = phoneNumber
     $.ajax({
         url: '/validate-number/',
         data: {
-            'phone_number': phone_number
+            'phone_number': phoneNumber
         },
         dataType: 'json',
         success: function (data) {
             if (data.is_taken) {
                 alert("Пользователь с таким номером уже существует");
-            }else{
-                console.log('pre')
-                const phoneNumber = phone_number;
-                console.log(phone_number)
-                const appVerifier = window.recaptchaVerifier;
-                console.log('recaptcha')
-                firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-                    .then((confirmationResult) => {
-                        // SMS sent. Prompt user to type the code from the message, then sign the
-                        // user in with confirmationResult.confirm(code).
-                        window.confirmationResult = confirmationResult;
-                        window.location.href = '/registration-submit/'
-                        console.log('sent')
-                    }).catch((error) => {
-                    // Error; SMS not sent
-                    console.log(error)
-                });
+            } else {
+                getConfirmCode()
             }
         }
     });
-    return phone_number
 }
 
-function sendConfirmCode() {
-    const code = getCodeFromUserInput();
-    confirmationResult.confirm(code).then((result) => {
-        // User signed in successfully.
-        const user = result.user;
-        // ...
+
+getConfirmCode = () => {
+    firebase.auth().signInWithPhoneNumber(userPhoneNumberGlobal, appVerifier).then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        document.getElementById("number").style.display="none";
+        document.getElementById("submit").style.display="block";
+        p.textContent = userPhoneNumberGlobal.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
     }).catch((error) => {
-        // User couldn't sign in (bad verification code?)
-        // ...
+        console.log(error)
     });
 }
+
+
+sendConfirmCode = () => {
+    const code = document.getElementsByClassName("form__input").item(1).value;
+    window.confirmationResult.confirm(code).then((result) => {
+        const user = result.user;
+        window.location.href = "/registration/"
+    }).catch((error) => {
+        console.log(error)
+    });
+};

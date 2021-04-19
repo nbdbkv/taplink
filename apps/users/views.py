@@ -10,6 +10,21 @@ from apps.users.forms import EditProfileForm
 from apps.users.models import CustomUser
 
 
+# class RegistrationView(FormView):
+#     form_class = RegistrationForm
+#     template_name = 'pages/registration.html'
+
+#     def form_valid(self, form):
+#         user = self.request.user
+#         user.phone_number = form.cleaned_data['phone_number']
+#         user.first_name = form.cleaned_data['first_name']
+#         user.last_name = form.cleaned_data['last_name']
+#         user.save(update_fields=['phone_number', 'first_name', 'last_name'])
+#         return HttpResponseRedirect(
+#             reverse('edit-profile', kwargs={'pk': self.request.user.pk})
+#         )
+#
+# #
 class RegistrationView(TemplateView):
     template_name = 'pages/registration.html'
 
