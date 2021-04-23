@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}registration-number.html
 {% load static %}
 
 {% block title_page %}{% endblock %}
@@ -17,15 +17,15 @@
                         Для продолжения, введите номер телефона
                     </h2>
                 </div>
-                <br>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input form__input-tel" required>
+                    <input type="text" id="input_number" class="form__input form__input-tel" required>
                 </label>
-                <button onclick="validateNumber()" class="form__btn" type="button">
+                <button onclick="validateNumber()" id="disable_button" class="form__btn" type="button">
                     Отправить код
                 </button>
                 <button id='sign-in-button' hidden></button>
             </form>
+
             <form action="" id="submit" style="display: none;">
                 <div class="form__box-head">
                     <h2 class="form__title">
@@ -52,15 +52,15 @@
                     </div>
                 </div>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input" placeholder="Введите код подтверждения" required>
+                    <input type="text" id="input_code" class="form__input" placeholder="Введите код подтверждения" required>
                 </label>
-                <button onclick="sendConfirmCode()" class="form__btn" type="button">
+                <button onclick="sendConfirmCode()" id="send_code" class="form__btn" type="button">
                     Отправить код
                 </button>
                 <a href="" class="no__sms">
                     Не пришло SMS сообщение?
                 </a>
-                <button onclick="getConfirmCode()" class="sms__timer" type="button" disabled>
+                <button onclick="getConfirmCode()" id="get_code"  class="sms__timer" type="button" disabled>
                     Отправить снова через 0:<span class="timer__seconds">59</span>
                 </button>
                 <button id='sign-in-button' hidden></button>

@@ -1,6 +1,5 @@
 let p = document.querySelector('p');
 let phoneNumberGlobal = ""
-jQuery("#phone_number").val(localStorage.getItem('phoneNumberLS'));
 
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("sign-in-button", {
     'size': 'invisible',
@@ -26,7 +25,6 @@ validateNumber = () => {
         success: function (data) {
             if (data.is_taken) {
                 alert("Пользователь с таким номером уже существует");
-                document.getElementById("disable_button").disabled = true;
             } else {
                 getConfirmCode()
             }
@@ -40,6 +38,7 @@ getConfirmCode = () => {
         window.confirmationResult = confirmationResult;
         document.getElementById("number").style.display="none";
         document.getElementById("submit").style.display="block";
+        localStorage.setItem('phoneNumberLS', phoneNumberGlobal)
         p.textContent = phoneNumberGlobal.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
     }).catch((error) => {
         console.log(error)
@@ -51,8 +50,9 @@ sendConfirmCode = () => {
     const code = document.getElementById("input_code").value;
     window.confirmationResult.confirm(code).then((result) => {
         const user = result.user;
-        localStorage.setItem('phoneNumberLS', user.phoneNumber)
-        window.location.href = "/registration/"
+        jQuery("#phone_number").val(phoneNumberGlobal);
+        console.log(phoneNumberGlobal)
+        document.getElementById('submit-button').click()
     }).catch((error) => {
         console.log(error)
         alert('Неправильный код')

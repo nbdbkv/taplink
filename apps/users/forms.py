@@ -7,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name')
+        fields = ('phone_number', 'first_name', 'last_name')
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -17,13 +17,7 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('first_name', 'last_name')
 
 
-class EditProfileForm(forms.ModelForm):
+class ChangeNumberForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name')
-
-
-class RegistrationForm(forms.ModelForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('phone_number', 'first_name', 'last_name')
+        fields = ('phone_number',)

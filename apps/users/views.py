@@ -2,30 +2,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 )
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, FormView
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.views.generic import TemplateView, CreateView, UpdateView, FormView
 
-from apps.users.forms import EditProfileForm
+from apps.users.forms import CustomUserCreationForm, ChangeNumberForm
 from apps.users.models import CustomUser
 
 
-# class RegistrationView(FormView):
-#     form_class = RegistrationForm
-#     template_name = 'pages/registration.html'
-
-#     def form_valid(self, form):
-#         user = self.request.user
-#         user.phone_number = form.cleaned_data['phone_number']
-#         user.first_name = form.cleaned_data['first_name']
-#         user.last_name = form.cleaned_data['last_name']
-#         user.save(update_fields=['phone_number', 'first_name', 'last_name'])
-#         return HttpResponseRedirect(
-#             reverse('edit-profile', kwargs={'pk': self.request.user.pk})
-#         )
-#
-# #
-class RegistrationView(TemplateView):
+class RegistrationView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('index_page')
     template_name = 'pages/registration.html'
 
 
@@ -33,16 +20,25 @@ class RegistrationNumberView(TemplateView):
     template_name = 'pages/registration-number.html'
 
 
+class ChangeNumberFormView(LoginRequiredMixin, FormView):
+    form_class = ChangeNumberForm
+    template_name = 'pages/change-number.html'
+
+    def form_valid(self, form):
+        user = self.request.user
+        user.phone_number = form.cleaned_data['phone_number']
+        user.save()
+        return HttpResponseRedirect(
+            reverse('edit-profile', kwargs={'pk': self.request.user.pk})
+        )
+
+
 def validate_phone_number(request):
-    phone_number = request.GET.get('phone_number', None)
+    phone_number = request.GET.get('phone_number')
     data = {
-        'is_taken': CustomUser.objects.filter(phone_number__iexact=phone_number).exists()
+        'is_taken': CustomUser.objects.filter(phone_number=phone_number).exists()
     }
     return JsonResponse(data)
-
-
-class RegistrationSubmitView(TemplateView):
-    template_name = 'pages/registration-submit.html'
 
 
 class UserLoginView(LoginView):
@@ -50,38 +46,22 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(LogoutView):
-    next_page = '/'
+    next_page = 'index_page'
 
 
-class EditProfileFormView(LoginRequiredMixin, FormView):
-    form_class = EditProfileForm
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = CustomUser
+    fields = ('first_name', 'last_name')
     template_name = 'pages/edit-profile.html'
 
-    def form_valid(self, form):
-        user = self.request.user
-        user.first_name = form.cleaned_data['first_name']
-        user.last_name = form.cleaned_data['last_name']
-        user.save(update_fields=['first_name', 'last_name'])
-        return HttpResponseRedirect(
-            reverse('edit-profile', kwargs={'pk': self.request.user.pk})
-        )
 
-
-class UserPasswordChangeView(PasswordChangeView):
+class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'pages/change-password.html'
     success_url = reverse_lazy('change-password-done_page')
 
 
-class UserPasswordChangeDoneView(PasswordChangeDoneView):
+class UserPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'pages/change-password-done.html'
-
-
-class ChangeNumberSubmitView(TemplateView):
-    template_name = 'pages/change-number-submit.html'
-
-
-class ChangeNumberView(TemplateView):
-    template_name = 'pages/change-number.html'
 
 
 class IndexView(TemplateView):
