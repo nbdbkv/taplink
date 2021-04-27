@@ -28,7 +28,7 @@
             </div>
         {% else %}
             <div class="header__inner">
-                <a href="" class="logo">
+                <a href="{% url 'index_page' %}" class="logo">
                     LOGOTYPE
                 </a>
                 <div class="header__right">
@@ -45,4 +45,5 @@
                 </div>
             </div>
         {% endif %}
+    </div>
 </header>

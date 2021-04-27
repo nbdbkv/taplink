@@ -10,6 +10,7 @@ window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("sign-in-button",
 
 let appVerifier = window.recaptchaVerifier;
 
+
 validateNumber = () => {
     let countryCode = document.getElementsByClassName("iti__selected-dial-code")[0].innerHTML;
     let inputNumber = document.getElementById("input_number").value;
@@ -24,9 +25,9 @@ validateNumber = () => {
         dataType: 'json',
         success: function (data) {
             if (data.is_taken) {
-                alert("Пользователь с таким номером уже существует");
-            } else {
                 getConfirmCode()
+            } else {
+                alert("Пользователь с таким номером не существует");
             }
         }
     });
@@ -38,6 +39,7 @@ getConfirmCode = () => {
         window.confirmationResult = confirmationResult;
         document.getElementById("number").style.display="none";
         document.getElementById("submit").style.display="block";
+        document.getElementById("password").style.display="none";
         p.textContent = phoneNumberGlobal.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
     }).catch((error) => {
         console.log(error)
@@ -49,10 +51,13 @@ sendConfirmCode = () => {
     const code = document.getElementById("input_code").value;
     window.confirmationResult.confirm(code).then((result) => {
         const user = result.user;
-        jQuery("#phone_number").val(phoneNumberGlobal);
-        document.getElementById('submit-button').click()
+        document.getElementById("number").style.display="none";
+        document.getElementById("submit").style.display="none";
+        document.getElementById("password").style.display="block";
+        jQuery("#front_number").val(phoneNumberGlobal);
     }).catch((error) => {
         console.log(error)
         alert('Неправильный код')
     });
 };
+

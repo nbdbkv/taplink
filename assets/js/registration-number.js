@@ -18,7 +18,7 @@ validateNumber = () => {
     let phoneNumber = formNumber.replace(/\s+/g, "")
     phoneNumberGlobal = phoneNumber
     $.ajax({
-        url: '/validate-number/',
+        url: $("#number").attr("data-url"),
         data: {
             'phone_number': phoneNumber
         },
@@ -52,7 +52,7 @@ sendConfirmCode = () => {
     window.confirmationResult.confirm(code).then((result) => {
         const user = result.user;
         localStorage.setItem('phoneNumberLS', user.phoneNumber)
-        window.location.href = "/registration/"
+        window.location.href = $("#submit").attr("data-url")
     }).catch((error) => {
         console.log(error)
         alert('Неправильный код')
