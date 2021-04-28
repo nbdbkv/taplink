@@ -40,7 +40,12 @@ getConfirmCode = () => {
         document.getElementById("submit").style.display="block";
         p.textContent = phoneNumberGlobal.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
     }).catch((error) => {
-        console.log(error)
+        grecaptcha.reset(window.recaptchaWidgetId);
+
+        // Or, if you haven't stored the widget ID:
+        window.recaptchaVerifier.render().then(function(widgetId) {
+            grecaptcha.reset(widgetId);
+        });
     });
 }
 
@@ -52,7 +57,6 @@ sendConfirmCode = () => {
         jQuery("#phone_number").val(phoneNumberGlobal);
         document.getElementById('submit-button').click()
     }).catch((error) => {
-        console.log(error)
         alert('Неправильный код')
     });
 };
