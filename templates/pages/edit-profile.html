@@ -11,28 +11,29 @@
 
     <div class="box__wrap">
         <div class="form__box">
-            <form action="">
+            <form action="" method="post">
+                {% csrf_token %}
                 <div class="form__box-head">
                     <h2 class="form__title">
                         Профиль
                     </h2>
-                    <a href="#" class="form__reg form__sign-out">
+                    <a href="{% url 'log-out' %}" class="form__reg form__sign-out">
                         Выход
                     </a>
                 </div>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input" placeholder="Введите новое имя" required>
+                    <input type="text" name="first_name" class="form__input" value="{{ user.first_name }}" placeholder="Введите новое имя" required>
                 </label>
                 <label class="form__input-wrap">
-                    <input type="text" class="form__input" placeholder="Введите новую фамилию" required>
+                    <input type="text" name="last_name" class="form__input" value="{{ user.last_name }}" placeholder="Введите новую фамилию" required>
                 </label>
                 <button class="form__btn" type="submit">
                     Сохранить изменения
                 </button>
-                <a href="#" class="sms__timer change__filed">
+                <a href="{% url 'change-password_page' %}" class="sms__timer change__filed">
                     Сменить пароль
                 </a>
-                <a href="#" class="sms__timer change__filed">
+                <a href="{% url 'change-num_page' %}" class="sms__timer change__filed">
                     Сменить номер
                 </a>
             </form>
