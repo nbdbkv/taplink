@@ -29,3 +29,4 @@ setWhatsApp = () => {
     }
     $('#submit-messenger').click()
 }
+
