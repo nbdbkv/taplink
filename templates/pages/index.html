@@ -13,7 +13,11 @@
             <div class="taplink__wrapper">
                 <div class="taplink">
                     <h4 class="taplink__title">
-                        Ссылка на ваш Таплинк
+                        {% if object.url %}
+                            https://taplink.kg/{{ object.url }}
+                        {% else %}
+                            Ссылка на ваш Таплинк
+                        {% endif %}
                     </h4>
                     <p class="taplink__click">
                         Для получения ссылки нажмите “Установить”
@@ -23,20 +27,20 @@
                                   fill="#374257"/>
                         </svg>
                     </p>
-{#                    <a href="#" class="taplink__link" id="taplink-link" target="_blank">#}
-{#                        https://taplink.cc/_gratia__#}
-{#                    </a>#}
+                    {#                    <a href="#" class="taplink__link" id="taplink-link" target="_blank">#}
+                    {#                        https://taplink.cc/_gratia__#}
+                    {#                    </a>#}
                     <div class="taplink__copy">
-                    <span>
-                        Ссылка успешно скопирована
-                    </span>
-{#                        <div class="copy__icon">#}
-{#                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"#}
-{#                                 xmlns="http://www.w3.org/2000/svg">#}
-{#                                <path d="M14.3749 0C14.2974 0 6.87487 0 6.87487 0C5.55236 0 4.37489 1.21313 4.37489 2.50001L3.65238 2.51689C2.3305 2.51689 1.24988 3.71312 1.24988 5V17.5C1.24988 18.7869 2.42738 20 3.74989 20H13.1249C14.4474 20 15.6249 18.7869 15.6249 17.5H16.2499C17.5724 17.5 18.7499 16.2869 18.7499 15V5.01501L14.3749 0ZM13.1249 18.75H3.74989C3.09364 18.75 2.4999 18.1369 2.4999 17.5V5C2.4999 4.36314 3.03428 3.77062 3.69053 3.77062L4.37489 3.75001V15C4.37489 16.2869 5.55236 17.5 6.87487 17.5H14.3749C14.3749 18.1369 13.7811 18.75 13.1249 18.75ZM17.4999 15C17.4999 15.6369 16.9061 16.25 16.2499 16.25H6.87487C6.21862 16.25 5.62488 15.6369 5.62488 15V2.50001C5.62488 1.86315 6.21862 1.25002 6.87487 1.25002H13.1249C13.1149 2.6894 13.1249 3.76565 13.1249 3.76565C13.1249 5.0644 14.2936 6.25002 15.6249 6.25002C15.6249 6.25002 16.2887 6.25002 17.4999 6.25002V15ZM15.6249 5C14.9593 5 14.3749 3.79064 14.3749 3.14188C14.3749 3.14188 14.3749 2.48437 14.3749 1.26938V1.26812L17.4999 5H15.6249ZM14.3749 8.76127H8.74989C8.4049 8.76127 8.1249 9.04064 8.1249 9.38564C8.1249 9.73064 8.4049 10.01 8.74989 10.01H14.3749C14.7199 10.01 14.9999 9.73061 14.9999 9.38564C14.9999 9.04064 14.7199 8.76127 14.3749 8.76127ZM14.3749 11.8831H8.74989C8.4049 11.8831 8.1249 12.1625 8.1249 12.5075C8.1249 12.8525 8.4049 13.1319 8.74989 13.1319H14.3749C14.7199 13.1319 14.9999 12.8525 14.9999 12.5075C14.9999 12.1625 14.7199 11.8831 14.3749 11.8831Z"#}
-{#                                      fill="#A5ADBC"/>#}
-{#                            </svg>#}
-{#                        </div>#}
+                <span>
+                    Ссылка успешно скопирована
+                </span>
+                        {#                        <div class="copy__icon">#}
+                        {#                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"#}
+                        {#                                 xmlns="http://www.w3.org/2000/svg">#}
+                        {#                                <path d="M14.3749 0C14.2974 0 6.87487 0 6.87487 0C5.55236 0 4.37489 1.21313 4.37489 2.50001L3.65238 2.51689C2.3305 2.51689 1.24988 3.71312 1.24988 5V17.5C1.24988 18.7869 2.42738 20 3.74989 20H13.1249C14.4474 20 15.6249 18.7869 15.6249 17.5H16.2499C17.5724 17.5 18.7499 16.2869 18.7499 15V5.01501L14.3749 0ZM13.1249 18.75H3.74989C3.09364 18.75 2.4999 18.1369 2.4999 17.5V5C2.4999 4.36314 3.03428 3.77062 3.69053 3.77062L4.37489 3.75001V15C4.37489 16.2869 5.55236 17.5 6.87487 17.5H14.3749C14.3749 18.1369 13.7811 18.75 13.1249 18.75ZM17.4999 15C17.4999 15.6369 16.9061 16.25 16.2499 16.25H6.87487C6.21862 16.25 5.62488 15.6369 5.62488 15V2.50001C5.62488 1.86315 6.21862 1.25002 6.87487 1.25002H13.1249C13.1149 2.6894 13.1249 3.76565 13.1249 3.76565C13.1249 5.0644 14.2936 6.25002 15.6249 6.25002C15.6249 6.25002 16.2887 6.25002 17.4999 6.25002V15ZM15.6249 5C14.9593 5 14.3749 3.79064 14.3749 3.14188C14.3749 3.14188 14.3749 2.48437 14.3749 1.26938V1.26812L17.4999 5H15.6249ZM14.3749 8.76127H8.74989C8.4049 8.76127 8.1249 9.04064 8.1249 9.38564C8.1249 9.73064 8.4049 10.01 8.74989 10.01H14.3749C14.7199 10.01 14.9999 9.73061 14.9999 9.38564C14.9999 9.04064 14.7199 8.76127 14.3749 8.76127ZM14.3749 11.8831H8.74989C8.4049 11.8831 8.1249 12.1625 8.1249 12.5075C8.1249 12.8525 8.4049 13.1319 8.74989 13.1319H14.3749C14.7199 13.1319 14.9999 12.8525 14.9999 12.5075C14.9999 12.1625 14.7199 11.8831 14.3749 11.8831Z"#}
+                        {#                                      fill="#A5ADBC"/>#}
+                        {#                            </svg>#}
+                        {#                        </div>#}
                         <div class="taplink__controll-icon" data-micromodal-trigger="modal-controll">
                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -68,54 +72,56 @@
             <div class="taplink__box">
                 <div class="taplink__box-content">
                     <div class="taplink__img">
-                        <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        {% if object.avatar %}
+                            <img src="{{ object.avatar.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        {% endif %}
                     </div>
                     <div class="taplink__text">
-                        <h5>
-                            Заголовок
-                        </h5>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-                            consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                            arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu
-                            pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-                            vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
-                            enim.
-                        </p>
+                        {% for editor in object.taplink_editors.all %}
+                            {{ editor|safe  }}
+                        {% endfor %}
                     </div>
                     <div class="taplink__contacts">
                         <h5>
                             Свяжитесь с нами:
                         </h5>
                         <div class="taplink__social-media">
-                            <a href="#" class="taplink__social-link taplink__telegram">
-                                Телеграм
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 20C15.5229 20 20 15.5229 20 10C20 4.47715 15.5229 0 10 0C4.47716 0 0 4.47715 0 10C0 15.5229 4.47716 20 10 20Z"
-                                          fill="#0088CC"/>
-                                    <path d="M5.26172 11.2124L6.46412 14.9098C6.5543 15.1703 6.87495 15.2705 7.08537 15.0901L10.6926 12.1142C10.6926 12.1142 6.86493 10.6212 6.86493 10.7014C6.86493 10.7715 5.26172 11.2124 5.26172 11.2124Z"
-                                          fill="#B5D1DB"/>
-                                    <path d="M14.7704 4.10808C12.4157 5.03995 4.81051 8.15618 1.93476 9.33855C1.554 9.49887 1.57404 10.0399 1.96482 10.1602L5.25139 11.2023L6.4538 14.8796C6.5039 15.0299 6.62414 15.1201 6.76442 15.1502C6.87464 15.1702 7.03496 12.1642 7.03496 12.1642C7.03496 12.1642 10.4919 14.7293 12.1251 15.9317C12.5259 16.2323 13.1071 16.0019 13.1973 15.5109C13.6883 12.9959 14.9007 6.71329 15.3215 4.55898C15.3917 4.25838 15.0811 3.98784 14.7704 4.10808Z"
-                                          fill="white"/>
-                                    <path d="M6.76498 15.1603C6.8752 15.1803 7.03552 12.1743 7.03552 12.1743L12.7069 6.84365C12.7469 6.80357 12.6968 6.74345 12.6568 6.77351L5.25195 11.2024L6.45436 14.8797C6.50446 15.04 6.63472 15.1302 6.76498 15.1603Z"
-                                          fill="#D6E2EA"/>
-                                </svg>
-                            </a>
-                            <a href="#" class="taplink__social-link taplink__whatsapp">
-                                WhatsApp
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M20 10C20 4.47075 15.5292 0 10 0C4.47075 0 0 4.48468 0 10C0 15.5292 4.47075 20 10 20C15.5153 20 20 15.5153 20 10Z"
-                                          fill="#43D854"/>
-                                    <path d="M16.003 9.16441C15.9194 5.96107 13.3289 3.4541 10.0977 3.4541C6.92217 3.4541 4.33165 5.91928 4.19237 9.05299C4.19237 9.13655 4.19237 9.22012 4.19237 9.31761C4.19237 10.3622 4.47092 11.3789 5.00017 12.2703C5.0141 12.2981 5.0141 12.312 5.0141 12.3399L3.96953 15.4318C3.9556 15.4736 3.99738 15.5154 4.03917 15.5015L7.25644 14.4708C7.28429 14.4708 7.29822 14.4708 7.32608 14.4708C8.17566 14.9304 9.13666 15.1672 10.1116 15.1672C13.3706 15.1672 16.0169 12.5349 16.0169 9.30368C16.0169 9.27583 16.003 9.16441 16.003 9.16441ZM6.11437 11.9639C5.58513 11.1839 5.30658 10.2647 5.30658 9.31761C5.30658 9.16441 5.3205 9.0112 5.33443 8.858C5.5712 6.40675 7.61855 4.55438 10.1116 4.55438C12.6046 4.55438 14.7077 6.47638 14.8887 8.94157C14.9027 9.08084 14.9027 9.20619 14.9027 9.31761C14.9027 11.936 12.7439 14.0808 10.1116 14.0808C9.40128 14.0808 8.71883 13.9276 8.09209 13.6352C7.91103 13.5516 7.57677 13.3566 7.47928 13.287C7.45142 13.273 7.4375 13.273 7.40964 13.273L5.79404 13.7884C5.75226 13.8023 5.72441 13.7605 5.73833 13.7327L6.26758 12.1867C6.28151 12.1588 6.26758 12.131 6.25365 12.1031C6.19794 12.0613 6.14223 11.9917 6.11437 11.9639Z"
-                                          fill="white"/>
-                                    <path d="M12.9101 10.6266C12.8683 10.5709 12.6177 10.4455 12.6177 10.4455C12.5202 10.3898 11.782 10.0277 11.6427 9.98593C11.5174 9.94415 11.392 9.88844 11.2667 10.0695C11.1692 10.2088 10.9046 10.5152 10.821 10.6127C10.7653 10.6823 10.7096 10.7102 10.5703 10.6405C10.5424 10.6266 9.88785 10.348 9.42824 9.94415C9.02434 9.58203 8.74578 9.15027 8.64829 8.96922C8.59258 8.85779 8.62043 8.81601 8.704 8.73245C8.74578 8.69066 8.9547 8.43997 8.98255 8.41211C9.01041 8.3564 9.08005 8.24498 9.08005 8.24498C9.13576 8.11963 9.1079 8.02214 9.06612 7.9525C9.03826 7.91072 8.66222 6.9915 8.62043 6.90793C8.50901 6.64331 8.39759 6.64331 8.28617 6.64331C8.23046 6.64331 7.72907 6.65724 7.57586 6.82437L7.54801 6.85222C7.39481 7.01936 7.06055 7.36754 7.06055 8.03607C7.06055 8.18927 7.0884 8.3564 7.13018 8.53746C7.22768 8.8578 7.40873 9.20598 7.6455 9.54024C7.6455 9.54024 8.02155 10.0556 8.20261 10.2645C8.78756 10.933 9.44216 11.4344 10.0968 11.6851C10.9463 12.0194 11.3085 12.089 11.5034 12.089C11.587 12.089 11.782 12.0472 11.8238 12.0333C12.0884 12.0054 12.7012 11.6851 12.8266 11.3369C12.9519 11.0026 12.9519 10.6962 12.9101 10.6266Z"
-                                          fill="white"/>
-                                </svg>
-                            </a>
+                            {% for messenger in object.taplink_messengers.all %}
+                                {% if messenger.telegram %}
+                                    <a href="https://t.me/{{ messenger.telegram }}" class="taplink__social-link taplink__telegram">
+                                        Телеграм
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 20C15.5229 20 20 15.5229 20 10C20 4.47715 15.5229 0 10 0C4.47716 0 0 4.47715 0 10C0 15.5229 4.47716 20 10 20Z"
+                                                  fill="#0088CC"/>
+                                            <path d="M5.26172 11.2124L6.46412 14.9098C6.5543 15.1703 6.87495 15.2705 7.08537 15.0901L10.6926 12.1142C10.6926 12.1142 6.86493 10.6212 6.86493 10.7014C6.86493 10.7715 5.26172 11.2124 5.26172 11.2124Z"
+                                                  fill="#B5D1DB"/>
+                                            <path d="M14.7704 4.10808C12.4157 5.03995 4.81051 8.15618 1.93476 9.33855C1.554 9.49887 1.57404 10.0399 1.96482 10.1602L5.25139 11.2023L6.4538 14.8796C6.5039 15.0299 6.62414 15.1201 6.76442 15.1502C6.87464 15.1702 7.03496 12.1642 7.03496 12.1642C7.03496 12.1642 10.4919 14.7293 12.1251 15.9317C12.5259 16.2323 13.1071 16.0019 13.1973 15.5109C13.6883 12.9959 14.9007 6.71329 15.3215 4.55898C15.3917 4.25838 15.0811 3.98784 14.7704 4.10808Z"
+                                                  fill="white"/>
+                                            <path d="M6.76498 15.1603C6.8752 15.1803 7.03552 12.1743 7.03552 12.1743L12.7069 6.84365C12.7469 6.80357 12.6968 6.74345 12.6568 6.77351L5.25195 11.2024L6.45436 14.8797C6.50446 15.04 6.63472 15.1302 6.76498 15.1603Z"
+                                                  fill="#D6E2EA"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                            {% for messenger in object.taplink_messengers.all %}
+                                {% if messenger.whatsapp %}
+                                    <a href="https://wa.me/{{ messenger.whatsapp }}" class="taplink__social-link taplink__whatsapp">
+                                        WhatsApp
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 10C20 4.47075 15.5292 0 10 0C4.47075 0 0 4.48468 0 10C0 15.5292 4.47075 20 10 20C15.5153 20 20 15.5153 20 10Z"
+                                                  fill="#43D854"/>
+                                            <path d="M16.003 9.16441C15.9194 5.96107 13.3289 3.4541 10.0977 3.4541C6.92217 3.4541 4.33165 5.91928 4.19237 9.05299C4.19237 9.13655 4.19237 9.22012 4.19237 9.31761C4.19237 10.3622 4.47092 11.3789 5.00017 12.2703C5.0141 12.2981 5.0141 12.312 5.0141 12.3399L3.96953 15.4318C3.9556 15.4736 3.99738 15.5154 4.03917 15.5015L7.25644 14.4708C7.28429 14.4708 7.29822 14.4708 7.32608 14.4708C8.17566 14.9304 9.13666 15.1672 10.1116 15.1672C13.3706 15.1672 16.0169 12.5349 16.0169 9.30368C16.0169 9.27583 16.003 9.16441 16.003 9.16441ZM6.11437 11.9639C5.58513 11.1839 5.30658 10.2647 5.30658 9.31761C5.30658 9.16441 5.3205 9.0112 5.33443 8.858C5.5712 6.40675 7.61855 4.55438 10.1116 4.55438C12.6046 4.55438 14.7077 6.47638 14.8887 8.94157C14.9027 9.08084 14.9027 9.20619 14.9027 9.31761C14.9027 11.936 12.7439 14.0808 10.1116 14.0808C9.40128 14.0808 8.71883 13.9276 8.09209 13.6352C7.91103 13.5516 7.57677 13.3566 7.47928 13.287C7.45142 13.273 7.4375 13.273 7.40964 13.273L5.79404 13.7884C5.75226 13.8023 5.72441 13.7605 5.73833 13.7327L6.26758 12.1867C6.28151 12.1588 6.26758 12.131 6.25365 12.1031C6.19794 12.0613 6.14223 11.9917 6.11437 11.9639Z"
+                                                  fill="white"/>
+                                            <path d="M12.9101 10.6266C12.8683 10.5709 12.6177 10.4455 12.6177 10.4455C12.5202 10.3898 11.782 10.0277 11.6427 9.98593C11.5174 9.94415 11.392 9.88844 11.2667 10.0695C11.1692 10.2088 10.9046 10.5152 10.821 10.6127C10.7653 10.6823 10.7096 10.7102 10.5703 10.6405C10.5424 10.6266 9.88785 10.348 9.42824 9.94415C9.02434 9.58203 8.74578 9.15027 8.64829 8.96922C8.59258 8.85779 8.62043 8.81601 8.704 8.73245C8.74578 8.69066 8.9547 8.43997 8.98255 8.41211C9.01041 8.3564 9.08005 8.24498 9.08005 8.24498C9.13576 8.11963 9.1079 8.02214 9.06612 7.9525C9.03826 7.91072 8.66222 6.9915 8.62043 6.90793C8.50901 6.64331 8.39759 6.64331 8.28617 6.64331C8.23046 6.64331 7.72907 6.65724 7.57586 6.82437L7.54801 6.85222C7.39481 7.01936 7.06055 7.36754 7.06055 8.03607C7.06055 8.18927 7.0884 8.3564 7.13018 8.53746C7.22768 8.8578 7.40873 9.20598 7.6455 9.54024C7.6455 9.54024 8.02155 10.0556 8.20261 10.2645C8.78756 10.933 9.44216 11.4344 10.0968 11.6851C10.9463 12.0194 11.3085 12.089 11.5034 12.089C11.587 12.089 11.782 12.0472 11.8238 12.0333C12.0884 12.0054 12.7012 11.6851 12.8266 11.3369C12.9519 11.0026 12.9519 10.6962 12.9101 10.6266Z"
+                                                  fill="white"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -212,7 +218,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action>
+                <form action="{% url 'avatar_page' %}" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -224,9 +231,13 @@
                         </div>
                         <div class="modal__avatar-flex">
                             <div class="modal__avatar-flex-itm">
-                                <img src="{% static 'img/jpg/868-536x354.jpg' %}" class="profile-pic" alt="">
+                                {% if taplink.avatar %}
+                                    <img src="{{ taplink.avatar.url }}" class="profile-pic" alt="">
+                                {% else %}
+                                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" class="profile-pic" alt="">
+                                {% endif %}
                             </div>
-                            <input class="file-upload" type="file" accept="image/*" id="avatar__btn">
+                            <input class="file-upload" type="file" name="avatar" accept="image/*" id="avatar__btn">
                             <label for="avatar__btn" class="avatar__upload">
                                 <div class="modal__avatar-icon">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -259,7 +270,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{% url 'messenger_page' %}" method="post">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -274,18 +286,19 @@
                                 <label class="messenger__fields-ttl">
                                     WhatsApp
                                 </label>
-                                <input type="text" class="form__input-tel messenger__input">
+                                <input type="text" name="whatsapp" id="set_whatsapp" class="form__input-tel messenger__input">
                             </div>
                             <div>
                                 <label class="messenger__fields-ttl">
                                     Telegram
                                 </label>
-                                <input type="text" class="form__input-tel messenger__input">
+                                <input type="text" name="telegram" class="controll__input">
                             </div>
                         </div>
-                        <button type="submit" class="modal__avatar-save">
+                        <button type="button" onclick="setWhatsApp()" class="modal__avatar-save">
                             Добавить блок
                         </button>
+                        <button id="submit-messenger" type="submit" hidden></button>
                     </div>
                 </form>
             </div>
@@ -295,7 +308,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{% url 'editor_page' %}" method="post">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -307,9 +321,14 @@
                         </div>
                         <div id="editor">
                         </div>
-                        <button type="submit" class="modal__avatar-save">
+                        <label class="form__input-wrap">
+                            <input type="hidden" id="set_text" name="editor" class="form__input" required>
+                        </label>
+                        <br>
+                        <button type="button" onclick="setText()" class="modal__avatar-save">
                             Добавить блок
                         </button>
+                        <button id="submit-text" type="submit" hidden></button>
                     </div>
                 </form>
             </div>
@@ -319,7 +338,8 @@
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
             <div class="modal__container" role="dialog" aria-modal="true"
                  aria-labelledby="modal-1-title">
-                <form action="">
+                <form action="{% url 'url_page' %}" method="post">
+                    {% csrf_token %}
                     <div class="controll__block">
                         <div class="controll__block-head">
                             <h5>
@@ -329,11 +349,13 @@
                                  data-micromodal-close>
                             </div>
                         </div>
-                        <input type="text" class="controll__input"
+                        <br>
+                        <input type="text" name="url" class="controll__input"
                                placeholder="Установите желаемую ссылку например: HelloWorld">
-{#                        <p class="link__error">#}
-{#                            К сожалению данная ссылка уже занята#}
-{#                        </p>#}
+                        {#                        <p class="link__error">#}
+                        {#                            К сожалению данная ссылка уже занята#}
+                        {#                        </p>#}
+
                         <button type="submit" class="modal__avatar-save controll__btn">
                             Сохранить
                         </button>
@@ -365,4 +387,5 @@
             });
         });
     </script>
+    <script src="{% static 'js/taplink.js' %}"></script>
 {% endblock %}

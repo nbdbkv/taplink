@@ -16,7 +16,7 @@ from apps.users.models import CustomUser
 
 class RegistrationView(CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('index_page')
+    success_url = reverse_lazy('sign-in_page')
     template_name = 'pages/registration.html'
 
 
@@ -27,13 +27,14 @@ class RegistrationNumberView(TemplateView):
 class ChangeNumberFormView(LoginRequiredMixin, FormView):
     form_class = ChangeNumberForm
     template_name = 'pages/change-number.html'
+    login_url = 'sign-in_page'
 
     def form_valid(self, form):
         user = self.request.user
         user.phone_number = form.cleaned_data['phone_number']
-        user.save()
+        user.save(update_fields=['phone_number'])
         return HttpResponseRedirect(
-            reverse('edit-profile', kwargs={'pk': self.request.user.pk})
+            reverse('edit-profile', kwargs={'pk': user.pk})
         )
 
 
@@ -50,22 +51,25 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(LogoutView):
-    next_page = 'index_page'
+    next_page = 'sign-in_page'
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = CustomUser
     fields = ('first_name', 'last_name')
     template_name = 'pages/edit-profile.html'
+    login_url = 'sign-in_page'
 
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'pages/change-password.html'
     success_url = reverse_lazy('change-password-done_page')
+    login_url = 'sign-in_page'
 
 
 class UserPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'pages/change-password-done.html'
+    login_url = 'sign-in_page'
 
 
 class UserPasswordResetFormView(FormView):
@@ -82,7 +86,3 @@ class UserPasswordResetFormView(FormView):
         user.set_password(form.cleaned_data['new_password1'])
         user.save(update_fields=['password'])
         return HttpResponseRedirect(reverse('sign-in_page'))
-
-
-class IndexView(TemplateView):
-    template_name = 'pages/index.html'

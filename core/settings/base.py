@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 
     'apps.templates_app',
     'apps.users',
+    'apps.taplink',
 
 ]
 
@@ -99,6 +100,7 @@ except ImportError:
         from .prod import *
     except ImportError:
         logging.error('core.settings.prod.py file not found !')
+        exit()
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
