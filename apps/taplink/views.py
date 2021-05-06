@@ -29,9 +29,8 @@ class TapLinkURLFormView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        if taplink:
-            taplink.url = form.cleaned_data["url"]
-            taplink.save()
+        taplink.url = form.cleaned_data["url"]
+        taplink.save()
         return redirect('index_page')
 
 
@@ -41,11 +40,10 @@ class TapLinkEditorFormView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        if taplink:
-            TapLinkEditor.objects.create(
-                taplink=taplink,
-                editor=form.cleaned_data["editor"],
-            )
+        TapLinkEditor.objects.create(
+            taplink=taplink,
+            editor=form.cleaned_data["editor"],
+        )
         return redirect('index_page')
 
 
@@ -55,9 +53,8 @@ class TapLinkAvatarFormView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        if taplink:
-            taplink.avatar = form.cleaned_data["avatar"]
-            taplink.save()
+        taplink.avatar = form.cleaned_data["avatar"]
+        taplink.save()
         return redirect('index_page')
 
 
@@ -68,10 +65,9 @@ class TapLinkMessengerFormView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        if taplink:
-            TapLinkMessenger.objects.create(
-                taplink=taplink,
-                telegram=form.cleaned_data["telegram"],
-                whatsapp=form.cleaned_data["whatsapp"],
-            )
+        TapLinkMessenger.objects.create(
+            taplink=taplink,
+            telegram=form.cleaned_data["telegram"],
+            whatsapp=form.cleaned_data["whatsapp"],
+        )
         return redirect('index_page')
