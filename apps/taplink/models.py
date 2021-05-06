@@ -9,8 +9,8 @@ CustomUser = get_user_model()
 
 
 class TapLink(models.Model):
-    url = models.SlugField(
-        unique=True, null=True, blank=True, verbose_name='URL'
+    url = models.CharField(
+        max_length=30, unique=True, null=True, blank=True, verbose_name='URL'
     )
     avatar = models.ImageField(
         upload_to=image_upload_to, null=True, blank=True,
@@ -28,7 +28,7 @@ class TapLink(models.Model):
 class TapLinkEditor(models.Model):
     editor = models.TextField(verbose_name='Editor')
     taplink = models.ForeignKey(
-        to=TapLink, on_delete=models.CASCADE, related_name='taplink_editors',
+        to=TapLink, on_delete=models.CASCADE, related_name='editors',
         verbose_name='TapLink'
     )
 
@@ -44,7 +44,7 @@ class TapLinkMessenger(models.Model):
         max_length=50, null=True, blank=True, verbose_name='WhatsApp'
     )
     taplink = models.ForeignKey(
-        to=TapLink, on_delete=models.CASCADE, related_name='taplink_messengers',
+        to=TapLink, on_delete=models.CASCADE, related_name='messengers',
         verbose_name='TapLink',
     )
 

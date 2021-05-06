@@ -79,7 +79,7 @@
                         {% endif %}
                     </div>
                     <div class="taplink__text">
-                        {% for editor in object.taplink_editors.all %}
+                        {% for editor in object.editors.all %}
                             {{ editor|safe  }}
                         {% endfor %}
                     </div>
@@ -88,7 +88,7 @@
                             Свяжитесь с нами:
                         </h5>
                         <div class="taplink__social-media">
-                            {% for messenger in object.taplink_messengers.all %}
+                            {% for messenger in object.messengers.all %}
                                 {% if messenger.telegram %}
                                     <a href="https://t.me/{{ messenger.telegram }}" class="taplink__social-link taplink__telegram">
                                         Телеграм
@@ -106,7 +106,7 @@
                                     </a>
                                 {% endif %}
                             {% endfor %}
-                            {% for messenger in object.taplink_messengers.all %}
+                            {% for messenger in object.messengers.all %}
                                 {% if messenger.whatsapp %}
                                     <a href="https://wa.me/{{ messenger.whatsapp }}" class="taplink__social-link taplink__whatsapp">
                                         WhatsApp

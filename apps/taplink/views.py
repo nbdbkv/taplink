@@ -32,8 +32,6 @@ class TapLinkURLFormView(LoginRequiredMixin, FormView):
         if taplink:
             taplink.url = form.cleaned_data["url"]
             taplink.save()
-        else:
-            taplink = None
         return redirect('index_page')
 
 
@@ -48,8 +46,6 @@ class TapLinkEditorFormView(LoginRequiredMixin, FormView):
                 taplink=taplink,
                 editor=form.cleaned_data["editor"],
             )
-        else:
-            taplink = None
         return redirect('index_page')
 
 
@@ -62,8 +58,6 @@ class TapLinkAvatarFormView(LoginRequiredMixin, FormView):
         if taplink:
             taplink.avatar = form.cleaned_data["avatar"]
             taplink.save()
-        else:
-            taplink = None
         return redirect('index_page')
 
 
@@ -80,6 +74,4 @@ class TapLinkMessengerFormView(LoginRequiredMixin, FormView):
                 telegram=form.cleaned_data["telegram"],
                 whatsapp=form.cleaned_data["whatsapp"],
             )
-        else:
-            taplink = None
         return redirect('index_page')
