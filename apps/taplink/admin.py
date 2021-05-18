@@ -5,7 +5,7 @@ from .models import TapLink, TapLinkEditor, TapLinkMessenger
 
 @admin.register(TapLink)
 class TapLinkAdmin(admin.ModelAdmin):
-    list_display = ('url', 'avatar', 'user')
+    list_display = ('nickname', 'avatar', 'user')
 
 
 @admin.register(TapLinkEditor)
@@ -15,4 +15,4 @@ class TapLinkEditorAdmin(admin.ModelAdmin):
 
 @admin.register(TapLinkMessenger)
 class TapLinkMessengerAdmin(admin.ModelAdmin):
-    list_display = ('telegram', 'whatsapp')
+    list_display = ('telegram', 'title_t', 'whatsapp', 'title_wa')

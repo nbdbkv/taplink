@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import post_save
+from django.urls import reverse
 
 from apps.taplink.utils import image_upload_to
 
@@ -9,8 +10,9 @@ CustomUser = get_user_model()
 
 
 class TapLink(models.Model):
-    url = models.CharField(
-        max_length=30, unique=True, null=True, blank=True, verbose_name='URL'
+    nickname = models.SlugField(
+        max_length=50, unique=True, null=True, blank=True,
+        verbose_name='Nickname'
     )
     avatar = models.ImageField(
         upload_to=image_upload_to, null=True, blank=True,
@@ -23,6 +25,9 @@ class TapLink(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse('shop-index_page', kwargs={'nickname': self.nickname})
 
 
 class TapLinkEditor(models.Model):
@@ -40,8 +45,14 @@ class TapLinkMessenger(models.Model):
     telegram = models.CharField(
         max_length=50, null=True, blank=True, verbose_name='Telegram'
     )
+    title_t = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='Telegram title'
+    )
     whatsapp = models.CharField(
         max_length=50, null=True, blank=True, verbose_name='WhatsApp'
+    )
+    title_wa = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name='WhatsApp title'
     )
     taplink = models.ForeignKey(
         to=TapLink, on_delete=models.CASCADE, related_name='messengers',
