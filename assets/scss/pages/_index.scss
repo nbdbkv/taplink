@@ -301,7 +301,10 @@
 
   .taplink__social-media {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
+    flex-wrap: wrap;
   }
 
   .taplink__social-link {

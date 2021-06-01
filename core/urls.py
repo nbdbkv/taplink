@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.users.urls')),
     path('', include('apps.taplink.urls')),
-    path('<slug:nickname>/', include('apps.shop.urls')),
+    path('', include('apps.shop.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 

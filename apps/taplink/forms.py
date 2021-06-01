@@ -3,10 +3,10 @@ from django import forms
 from .models import TapLink, TapLinkEditor, TapLinkMessenger
 
 
-class TapLinkNickNameForm(forms.ModelForm):
+class TapLinkPathNameForm(forms.ModelForm):
     class Meta:
         model = TapLink
-        fields = ('nickname',)
+        fields = ('pathname',)
 
 
 class TapLinkEditorForm(forms.ModelForm):

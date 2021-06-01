@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from django.views.generic import TemplateView, FormView
 
 from apps.taplink.forms import (
-    TapLinkNickNameForm, TapLinkEditorForm, TapLinkAvatarForm,
+    TapLinkPathNameForm, TapLinkEditorForm, TapLinkAvatarForm,
     TapLinkMessengerForm
 )
 from .models import TapLink, TapLinkEditor, TapLinkMessenger
@@ -17,7 +17,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['nickname_form'] = TapLinkNickNameForm
+        context['pathname_form'] = TapLinkPathNameForm
         context['editor_form'] = TapLinkEditorForm
         context['avatar_form'] = TapLinkAvatarForm
         context['messenger_form'] = TapLinkMessengerForm
@@ -26,16 +26,16 @@ class IndexView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class TapLinkNickNameFormView(LoginRequiredMixin, FormView):
+class TapLinkPathNameFormView(LoginRequiredMixin, FormView):
     template_name = 'pages/index.html'
-    form_class = TapLinkNickNameForm
+    form_class = TapLinkPathNameForm
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        if form.cleaned_data["nickname"]:
-            taplink.nickname = slugify(form.cleaned_data["nickname"])
+        if form.cleaned_data["pathname"]:
+            taplink.pathname = slugify(form.cleaned_data["pathname"])
         else:
-            taplink.nickname = form.cleaned_data["nickname"]
+            taplink.pathname = form.cleaned_data["pathname"]
         taplink.save()
         return redirect('index_page')
 

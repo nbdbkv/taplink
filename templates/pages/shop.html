@@ -9,7 +9,40 @@
 
 {% block content %}
     <div class="container">
-        <h1>Добро пожаловать в магазин!</h1>
+        <p>Все продукты</p>
+        <ul>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Коллекции</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="">Collection1</a>
+                </div>
+            </li>
+        </ul>
+        <form action="">
+            <div class="input-group">
+                <input type="text" placeholder="Поиск">
+                <div>
+                    <button class="btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="row row-cols-1 row-cols-md-4">
+            {% for i in 'aaaaaaa' %}
+                <div class="col mt-4">
+                    <div class="card">
+                        <img src="{% static 'img/jpg/868-536x354.jpg' %}" class="card-img-top" alt="...">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="font-size: small">New price: </li>
+                            <li class="list-group-item" style="font-size: small">Old price: </li>
+                            <li class="list-group-item" style="font-size: small">Description: </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
 

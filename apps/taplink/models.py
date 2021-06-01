@@ -10,9 +10,9 @@ CustomUser = get_user_model()
 
 
 class TapLink(models.Model):
-    nickname = models.SlugField(
+    pathname = models.SlugField(
         max_length=50, unique=True, null=True, blank=True,
-        verbose_name='Nickname'
+        verbose_name='Pathname'
     )
     avatar = models.ImageField(
         upload_to=image_upload_to, null=True, blank=True,
@@ -27,7 +27,7 @@ class TapLink(models.Model):
         return str(self.user)
 
     def get_absolute_url(self):
-        return reverse('shop-index_page', kwargs={'nickname': self.nickname})
+        return reverse('shop_page', kwargs={'pathname': self.pathname})
 
 
 class TapLinkEditor(models.Model):
