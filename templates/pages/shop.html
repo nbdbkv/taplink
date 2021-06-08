@@ -9,35 +9,30 @@
 
 {% block content %}
     <div class="container">
-        <p>Все продукты</p>
-        <ul>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">Коллекции</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="">Collection1</a>
-                </div>
-            </li>
-        </ul>
-        <form action="">
-            <div class="input-group">
-                <input type="text" placeholder="Поиск">
-                <div>
-                    <button class="btn-success">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+        <form class="form-inline mt-4 mb-4" method="get">
+            <input name="search" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
         </form>
+        <button type="button" class="btn btn-primary mb-4">Все товары</button>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Коллекции
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Action</button>
+                <button class="dropdown-item" type="button">Another action</button>
+                <button class="dropdown-item" type="button">Something else here</button>
+            </div>
+        </div>
         <div class="row row-cols-1 row-cols-md-4">
-            {% for i in 'aaaaaaa' %}
+            {% for product in products %}
                 <div class="col mt-4">
                     <div class="card">
-                        <img src="{% static 'img/jpg/868-536x354.jpg' %}" class="card-img-top" alt="...">
+                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.main_image.url }}" class="card-img-top" alt="..."></a>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-size: small">New price: </li>
-                            <li class="list-group-item" style="font-size: small">Old price: </li>
-                            <li class="list-group-item" style="font-size: small">Description: </li>
+                            <li class="list-group-item" style="font-size: small">New price: ${{ product.new_price }}</li>
+                            <li class="list-group-item" style="font-size: small">Old price: ${{ product.old_price }}</li>
+                            <li class="list-group-item" style="font-size: small">Description: {{ product.description }}</li>
                         </ul>
                     </div>
                 </div>

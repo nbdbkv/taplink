@@ -8,19 +8,22 @@
 {% block style %}{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
-        <div class="row mt-5">
-            <div class="col-10 mx-auto col-md-6 my-3">
-                <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+    <div class="container">
+        <a class="btn btn-primary mt-4 mb-4" href="{% url 'index_page' %}" role="button">Главная страница</a>
+        <div class="card">
+            <img src="{{ product.main_image.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Название : {{ product.product_name }}</h5>
+                <p class="card-text">Описание : {{ product.description }}</p>
             </div>
-        </div>
-        <div class="col-10 mx-auto col-md-6 my-3">
-            <div>
-                <h1>Product name</h1>
-                <h5 class="text-info font-italic mb-4">$10.00</h5>
-                <p>Product Description</p>
-                <p class="text-justify">Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.</p>
-                <p class="text-justify">In stock</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Новая цена : ${{ product.new_price }}</li>
+                <li class="list-group-item">Старая цена : ${{ product.old_price}}</li>
+                <li class="list-group-item">Количество : {{ product.quantity}}</li>
+            </ul>
+            <div class="card-body">
+                <button class="btn btn-primary mb-4" type="submit">Добавить в корзину</button>
+                <a class="btn btn-primary" href="#" role="button">Купить товар</a>
             </div>
         </div>
     </div>

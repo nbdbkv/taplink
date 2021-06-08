@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -17,7 +18,14 @@ class ProductListView(LoginRequiredMixin, ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.filter(seller=self.request.user)
+        query = self.request.GET.get('search')
+        if query:
+            return Product.objects.filter(
+                Q(seller=self.request.user) &
+                Q(product_name__icontains=query)
+            )
+        else:
+            return Product.objects.filter(seller=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,15 +45,14 @@ class ProductAddFormView(LoginRequiredMixin, FormView):
         collection, _ = Collection.objects.get_or_create(
             collection_name=self.request.POST.get('collection_name')
         )
-        print(collection)
         product.collection = collection
         product.seller = self.request.user
         product.save()
-        # images = self.request.FILES.getlist('image')
-        # for image in images:
-        #     ProductImage.objects.create(
-        #         product=product,
-        #         image=image)
+        images = self.request.FILES.getlist('image')
+        for image in images:
+            ProductImage.objects.create(
+                image=image,
+                product=product)
         return redirect('products_page')
 
 
@@ -55,7 +62,25 @@ class ProductDeleteView(DeleteView):
     success_url = reverse_lazy('products_page')
 
 
+class ShopView(ListView):
+    model = Product
+    template_name = 'pages/shop.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            return Product.objects.filter(
+                Q(seller=self.request.user) &
+                Q(product_name__icontains=query)
+            )
+        else:
+            return Product.objects.filter(seller=self.request.user)
+
+
 class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
     template_name = 'pages/product.html'
 
 
@@ -67,8 +92,6 @@ class CartView(TemplateView):
     template_name = 'pages/cart.html'
 
 
-class ShopView(TemplateView):
-    template_name = 'pages/shop.html'
 
 
 

@@ -16,7 +16,7 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = (
             'product_name', 'description', 'collection', 'new_price',
-            'old_price', 'is_available', 'quantity'
+            'old_price', 'is_available', 'quantity', 'main_image'
         )
 
 

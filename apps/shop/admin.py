@@ -12,5 +12,10 @@ class CollectionAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'product_name', 'description', 'collection', 'new_price', 'old_price',
-        'quantity', 'is_available', 'created', 'seller'
+        'quantity', 'is_available', 'main_image', 'created', 'seller'
     )
+
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('image',)

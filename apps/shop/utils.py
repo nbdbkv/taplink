@@ -4,6 +4,14 @@ import hashlib
 from django.template.defaultfilters import slugify
 
 
+def main_image_upload_to(instance, filename):
+    basename = os.path.basename(filename)
+    root, ext = os.path.splitext(basename)
+    hash_object = hashlib.md5(f"{root}".encode())
+    return f'shop/{instance.seller.taplinks}/{instance.product_name}/' \
+           f'{hash_object.hexdigest()}{ext}'
+
+
 def image_upload_to(instance, filename):
     basename = os.path.basename(filename)
     root, ext = os.path.splitext(basename)
