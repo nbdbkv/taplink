@@ -87,7 +87,7 @@
       }
     }
 
-    @include MQ(phone) {
+    @include MQ(m-tabled) {
       margin-right: 24px;
       span{
         display: none;

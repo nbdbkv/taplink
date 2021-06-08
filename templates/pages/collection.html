@@ -21,69 +21,26 @@
 </div>
 <div class="container">
     <div class="prod-content">
-        <div class="prod-content-header">
-            <form action="" class="search">
-                <input type="text" class="search-input" placeholder="Поиск">
-                <button type="submit" class="search-btn"></button>
-            </form>
-            <div class="pagination-wrap">
-                {% include 'components/pagination.html' %}
-            </div>
-        </div>
         <div class="prod-table-wrap">
-            <table class="prod-table">
+            <table class="prod-table bought collection">
                 <tr>
                     <th>
-                        <div>Название</div>
-                    </th>
-                    <th>
-                        <div>Цена</div>
-                    </th>
-                    <th>
-                        <div>Дата добавления</div>
+                        <div>Название коллекции</div>
                     </th>
                     <th>
                         <div>Количество товара</div>
                     </th>
-                    <th>
-                        <div>Коллекция</div>
-                    </th>
                 </tr>
                 <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
+                    <td>Лето 2020</td>
+                    <td>16</td>
                 </tr>
             </table>
+        </div>
+        <div class="prod-content-header bought">
+            <div class="pagination-wrap">
+                {% include 'components/pagination.html' %}
+            </div>
         </div>
     </div>
 </div>
@@ -162,39 +119,60 @@
     </div>
 </div>
 
+<div class="modal micromodal-slide" id="add-collection" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container add-product" role="dialog" aria-modal="true"
+             aria-labelledby="modal-title">
+            <form action="">
+                <div class="controll__block add-modal">
+                    <div class="controll__block-head">
+                        <h5>Коллекция</h5>
+                        <div class="controll__block-close" aria-label="Close modal"
+                             data-micromodal-close>
+                        </div>
+                    </div>
+                    <div class="add-coll-head">
+                        <input class="controll__input" type="text" placeholder="Введите название товара">
+                        <div class="add-prod-btn add-collection-btn">Добавить</div>
+                    </div>
+                    <div class="add-coll-flex">
+                        <div>Товары</div>
+                        <div class="collection-itm">
+                            <span>Летние штаны</span>
+                            <span class="delete"></span>
+                        </div>
+                        <div class="collection-itm">
+                            <span>Летние штаны</span>
+                            <span class="delete"></span>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <button type="submit" class="add-prod-btn">Сохранить</button>
+                        <div class="add-prod-btn delete">Удалить коллекцию</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-    $('.add-textarea').on('input', function () {
-        this.style.height = "";
-        this.style.height = this.scrollHeight + "px";
+    $('.prod-table.bought.collection tr:not(:first-child)').on('click', function () {
+        MicroModal.show('add-collection')
     })
 
-    $('.catalog-toggle').on('click', function () {
-        $(this).toggleClass('hide')
+    $('.add-collection-btn').on('click', function () {
+        $('.add-coll-flex').append($('<div class="collection-itm"><span>'+$(this).siblings('.controll__input').val() +
+        '</span><span class="delete"></span></div>'))
+
+        $(this).siblings('.controll__input').val('')
     })
 
-    $('.add-collection').on('click', function () {
-        $('.new-collection').addClass('show')
-    })
-
-    $('.collection-item').on('click', function () {
-        $(this).toggleClass('active')
-    })
-
-    $('.add-new-coll').on('click', function () {
-        let collectionField = $('.new-coll-input')
-
-        if(collectionField.val() !== '') {
-            $('.collection-tags').append($('<div class="collection-item">'+ collectionField.val() + '</div>'))
-        }
-
-        collectionField.val('')
-    })
-
-    $('.add-photo-item .delete').on('click', function () {
-        $(this).parent().remove()
+    $('.add-prod-btn.delete').on('click', function (){
+        $('.collection-itm').remove()
     })
 </script>
 {% endblock %}

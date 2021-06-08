@@ -8,171 +8,103 @@
 {% block style %}{% endblock %}
 
 {% block content %}
-<div class="products-header-wrap">
-    <div class="container">
-        <div class="products-header">
-            <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
-            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
+<div class="container">
+    <div class="shop-header">
+        <a href="#!" class="shop-prev">
+            Вернуться назад
+        </a>
+        <div class="quantity">
+            <span>1</span>
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="prod-content">
-        <div class="prod-content-header">
+<div class="shop-content">
+    <div class="container">
+        <div class="shop-content-head">
+            <div class="shop-ava">
+                <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+            </div>
+            <h4 class="ava-ttl">
+                Username
+            </h4>
+        </div>
+        <div class="shop-filter">
             <form action="" class="search">
                 <input type="text" class="search-input" placeholder="Поиск">
                 <button type="submit" class="search-btn"></button>
             </form>
-            <div class="pagination-wrap">
-                <div class="pagintaion">
-                    <!--                    для активного pagination-item добавить класс active-->
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.24023 9.97644C7.24023 10.1864 7.32324 10.3671 7.48437 10.5282L11.2344 14.1854C11.3613 14.3124 11.5176 14.3807 11.7031 14.3807C12.084 14.3807 12.3867 14.078 12.3867 13.702C12.3867 13.5165 12.3135 13.3407 12.1768 13.204L8.85645 9.98132L12.1768 6.75378C12.3086 6.61707 12.3867 6.44617 12.3867 6.25574C12.3867 5.87976 12.084 5.57703 11.7031 5.57703C11.5176 5.57703 11.3613 5.64539 11.2295 5.77234L7.48437 9.42957C7.31836 9.60046 7.24023 9.77136 7.24023 9.97644Z"
-                              fill="#D3D3D3"/>
-                    </svg>
-                    <a href="#!" class="pagination-item">1</a>
-                    <a href="#!" class="pagination-item">2</a>
-                    <a href="#!" class="pagination-item">3</a>
-                    <a href="#!" class="pagination-item">4</a>
-                    <a href="#!" class="pagination-item">5</a>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.7596 10.0236C12.7596 9.81364 12.6766 9.63298 12.5155 9.47184L8.76546 5.81462C8.63851 5.68766 8.48226 5.6193 8.29671 5.6193C7.91585 5.6193 7.61312 5.92204 7.61312 6.29801C7.61312 6.48356 7.68636 6.65934 7.82308 6.79606L11.1434 10.0187L7.82308 13.2463C7.69124 13.383 7.61312 13.5539 7.61312 13.7443C7.61312 14.1203 7.91585 14.423 8.29671 14.423C8.48226 14.423 8.63851 14.3547 8.77035 14.2277L12.5155 10.5705C12.6815 10.3996 12.7596 10.2287 12.7596 10.0236Z"
-                              fill="#D3D3D3"/>
-                    </svg>
+            <div class="filter-item all-products">Все товары</div>
+            <div class="filter-item collections">Коллекции</div>
+        </div>
+        <div class="shop-grid">
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
                 </div>
             </div>
-        </div>
-        <div class="prod-table-wrap">
-            <table class="prod-table">
-                <tr>
-                    <th>
-                        <div>Название</div>
-                    </th>
-                    <th>
-                        <div>Цена</div>
-                    </th>
-                    <th>
-                        <div>Дата добавления</div>
-                    </th>
-                    <th>
-                        <div>Количество товара</div>
-                    </th>
-                    <th>
-                        <div>Коллекция</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="modal micromodal-slide" id="add-product" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container add-product" role="dialog" aria-modal="true"
-             aria-labelledby="modal-title">
-            <form action="">
-                <div class="controll__block add-modal">
-                    <div class="controll__block-head">
-                        <h5>Добавить товар</h5>
-                        <div class="controll__block-close" aria-label="Close modal"
-                             data-micromodal-close>
-                        </div>
-                    </div>
-                    <input type="text" class="controll__input "
-                           placeholder="Название товара">
-                    <textarea class="controll__input add-textarea" placeholder="Описание товара"></textarea>
-                    <div class="collection">
-                        <div class="collection-tags">
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                        </div>
-                        <div class="add-collection-wrap">
-                            <div class="add-collection">Новая коллекция</div>
-                        </div>
-                    </div>
-                    <div class="new-collection">
-                        <input type="text" class="controll__input new-coll-input"
-                               placeholder="Название новой коллекции">
-                        <div class="add-prod-btn add-new-coll">Добавить</div>
-                    </div>
-                    <div class="price-inputs">
-                        <input type="text" class="controll__input"
-                               placeholder="Старая цена">
-                        <input type="text" class="controll__input"
-                               placeholder="Новая цена">
-                    </div>
-                    <div class="add-photo-head">
-                        <span>Виден в каталоге:</span>
-                        <div class="catalog-toggle">
-                            <span>Да</span>
-                            <span>Нет</span>
-                        </div>
-                    </div>
-                    <div class="add-photo">
-                        <div class="add-photo-item add-drop">
-                            <img src="{% static 'img/icon/camera.svg' %}" alt="">
-                            <span>Добавить</span>
-                            <input id="add-photo" type="file">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                    </div>
-                    <button type="submit" class="add-prod-btn">Добавить товар</button>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
                 </div>
-            </form>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -180,36 +112,4 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $('.add-textarea').on('input', function () {
-        this.style.height = "";
-        this.style.height = this.scrollHeight + "px";
-    })
-
-    $('.catalog-toggle').on('click', function () {
-        $(this).toggleClass('hide')
-    })
-
-    $('.add-collection').on('click', function () {
-        $('.new-collection').addClass('show')
-    })
-
-    $('.collection-item').on('click', function () {
-        $(this).toggleClass('active')
-    })
-
-    $('.add-new-coll').on('click', function () {
-        let collectionField = $('.new-coll-input')
-
-        if(collectionField.val() !== '') {
-            $('.collection-tags').append($('<div class="collection-item">'+ collectionField.val() + '</div>'))
-        }
-
-        collectionField.val('')
-    })
-
-    $('.add-photo-item .delete').on('click', function () {
-        $(this).parent().remove()
-    })
-</script>
 {% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="shop-header">
+        <a href="#!" class="shop-prev">
+            Вернуться назад
+        </a>
+        <div class="quantity">
+            <span>1</span>
+        </div>
+    </div>
+</div>
+<div class="shop-content cart">
+    <div class="container">
+        <h1 class="title">
+            Корзина
+        </h1>
+        <div class="cart-grid">
+            <div class="cart-flex">
+                <div class="cart-item">
+                    <div class="cart-remove">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.66329 9.00008L12.6126 6.05067C12.7958 5.86759 12.7958 5.57052 12.6126 5.38743C12.4293 5.20419 12.1326 5.20419 11.9494 5.38743L9.00008 8.33684L6.05064 5.38743C5.8674 5.20419 5.57066 5.20419 5.38743 5.38743C5.20419 5.57052 5.20419 5.86759 5.38743 6.05067L8.33686 9.00008L5.38743 11.9495C5.20419 12.1326 5.20419 12.4296 5.38743 12.6127C5.47904 12.7042 5.59912 12.75 5.71903 12.75C5.83895 12.75 5.95902 12.7042 6.05064 12.6126L9.00008 9.66316L11.9494 12.6126C12.041 12.7042 12.1611 12.75 12.281 12.75C12.4009 12.75 12.521 12.7042 12.6126 12.6126C12.7958 12.4295 12.7958 12.1324 12.6126 11.9493L9.66329 9.00008Z"
+                                  fill="#472F91"/>
+                        </svg>
+                    </div>
+                    <div class="cart-img">
+                        <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                        <img class="cart-pic" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                    </div>
+                    <div>
+                        <h4 class="item-ttl">
+                            Женские летние шорты
+                        </h4>
+                        <p class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. LaoreetLorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. LaoreetLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            LaoreetLorem ipsum dolor sit amet, consectetur adipiscing elit. LaoreetLorem ipsum dolor sit
+                            amet, consectetur adipiscing elit. LaoreetLorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Laoreet
+                        </p>
+                        <div class="price">
+                            <span class="current-price">1365 с.</span>
+                            <span class="old-price">1365 с.</span>
+                        </div>
+                        <div class="calculator">
+                            <div class="calc-btn">-</div>
+                            <input type="text" value="1">
+                            <div class="calc-btn">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="cart-sum">
+                    <h3 class="sum-title">
+                        Сумма заказа
+                    </h3>
+                    <div class="check-grid">
+                        <div class="check-flex">
+                            <div class="check-ttl">Общее количество:</div>
+                            <div class="check-val">2 товара (3 шт)</div>
+                        </div>
+                        <div class="check-flex">
+                            <div class="check-ttl">Стоимость:</div>
+                            <div class="check-val">19 400 сом</div>
+                        </div>
+                    </div>
+                    <div class="check-total">
+                        <span>К оплате:</span>
+                        <span class="total-val">19 500 сом</span>
+                    </div>
+                    <div class="cart-sum-btn">Заказать</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
