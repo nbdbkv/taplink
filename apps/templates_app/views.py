@@ -35,3 +35,7 @@ class ChangeNumberView(TemplateView):
 
 class IndexView(TemplateView):
     template_name = 'pages/index.html'
+
+
+class ProductsView(TemplateView):
+    template_name = 'pages/products.html'

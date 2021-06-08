@@ -61,3 +61,68 @@
     }
   }
 }
+
+.nav{
+  margin-right: auto;
+  padding-left: 48px;
+  margin-left: 48px;
+  border-left: 1px solid #F1F1F1;
+  display: flex;
+
+  @include MQ(phone) {
+    padding-left: 0;
+    border-left: none;
+    margin-right: 24px;
+    margin-left: auto;
+  }
+
+  .nav-link{
+    text-decoration: none;
+    display: flex;
+    margin-right: 40px;
+
+    &:hover{
+      span{
+        border-bottom: 1px solid #8AD9FF;
+      }
+    }
+
+    @include MQ(phone) {
+      margin-right: 24px;
+      span{
+        display: none;
+      }
+    }
+
+    span{
+      color: #374257;
+      margin-left: 6px;
+    }
+
+    &.active{
+      span{
+        border-bottom: 1px solid #8AD9FF;
+      }
+    }
+
+    &:last-child{
+      margin-right: 0;
+    }
+
+    &::before{
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+
+    &.page::before{
+      background: url("../img/icon/web-site.svg") no-repeat center;
+    }
+
+    &.products::before{
+      background: url("../img/icon/store.svg") no-repeat center;
+    }
+  }
+}

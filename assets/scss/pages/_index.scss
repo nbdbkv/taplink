@@ -262,6 +262,11 @@
     border: none;
     transition: .2s;
 
+    &.shop-btn{
+      padding: 18px;
+      text-decoration: none;
+    }
+
     &:hover {
       background: #3346E0;
     }
@@ -270,6 +275,9 @@
 
 .taplink__box-content {
   padding: 16px;
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 32px;
 }
 
 .taplink__img {
@@ -277,7 +285,7 @@
   height: 130px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 16px auto 32px auto;
+  margin: 0 auto;
 
   img {
     width: 100%;
@@ -287,7 +295,6 @@
 }
 
 .taplink__text {
-  margin-bottom: 32px;
 
   h5 {
     margin-bottom: 14px;
@@ -302,6 +309,7 @@
   .taplink__social-media {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
   }
 
   .taplink__social-link {
