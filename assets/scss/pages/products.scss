@@ -241,6 +241,7 @@
     font-size: 14px;
     color: #2D3540;
     padding: 16px 10px;
+    cursor: pointer;
 
     &:first-child {
       min-width: 224px;
@@ -648,13 +649,13 @@
     will-change: unset !important;
 
     &.add-product {
-      margin: 100px auto 50px auto;
+      margin: 200px auto 50px auto;
       width: 100%;
       max-width: 840px;
       text-align: center;
 
-      @media (max-width: 375px) {
-        margin-top: 170px;
+      @include MQ(m-tabled) {
+        margin-top: 300px;
       }
 
       .controll__input {
