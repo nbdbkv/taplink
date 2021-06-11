@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="shop-header">
+        <a href="#!" class="shop-prev">
+            Вернуться назад
+        </a>
+        <div class="quantity">
+            <span>1</span>
+        </div>
+    </div>
+</div>
+<div class="shop-content">
+    <div class="container">
+        <div class="shop-content-head">
+            <div class="shop-ava">
+                <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+            </div>
+            <h4 class="ava-ttl">
+                Username
+            </h4>
+        </div>
+        <div class="shop-filter">
+            <form action="" class="search">
+                <input type="text" class="search-input" placeholder="Поиск">
+                <button type="submit" class="search-btn"></button>
+            </form>
+            <div class="filter-item all-products">Все товары</div>
+            <div class="filter-item collections">Коллекции</div>
+        </div>
+        <div class="shop-grid">
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-img-wrap">
+                    <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                    <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="" class="shop-img">
+                </div>
+                <h3 class="shop-item-ttl">Женские летние шорты</h3>
+                <h4 class="shop-item-subttl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet...
+                </h4>
+                <div class="shop-item-price">
+                    <span class="current-price">1365 с.</span>
+                    <span class="old-price">24 000 c</span>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

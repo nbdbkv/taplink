@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_page %}{% endblock %}
+
+{% block style-libs %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+<div class="products-header-wrap">
+    <div class="container">
+        <div class="products-header">
+            <!--        актиным link добавить класс active-->
+            <a href="#!" class="link">Перейти в магазин</a>
+            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
+            <a href="#!" class="link">Купленные товары</a>
+            <a href="#!" class="link">Коллекция</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="prod-content">
+        <div class="prod-table-wrap">
+            <table class="prod-table bought">
+                <tr>
+                    <th>
+                        <div>Название</div>
+                    </th>
+                    <th>
+                        <div>Цена</div>
+                    </th>
+                    <th>
+                        <div>Количество</div>
+                    </th>
+                    <th>
+                        <div>Имя Фамилия</div>
+                    </th>
+                    <th>
+                        <div>Телефон</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Шорты летние</span>
+                        <span class="gray">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        </span>
+                    </td>
+                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
+                    <td>2 шт</td>
+                    <td>Фывов Алексей.</td>
+                    <td>+ 996 700 12 34 56</td>
+                </tr>
+            </table>
+        </div>
+        <div class="prod-content-header bought">
+            <div class="pagination-wrap">
+                {% include 'components/pagination.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="add-product" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container add-product" role="dialog" aria-modal="true"
+             aria-labelledby="modal-title">
+            <form action="">
+                <div class="controll__block add-modal">
+                    <div class="controll__block-head">
+                        <h5>Добавить товар</h5>
+                        <div class="controll__block-close" aria-label="Close modal"
+                             data-micromodal-close>
+                        </div>
+                    </div>
+                    <input type="text" class="controll__input "
+                           placeholder="Название товара">
+                    <textarea class="controll__input add-textarea" placeholder="Описание товара"></textarea>
+                    <div class="collection">
+                        <div class="collection-tags">
+                            <div class="collection-item">Лето 2020</div>
+                            <div class="collection-item">Лето 2020</div>
+                            <div class="collection-item">Лето 2020</div>
+                            <div class="collection-item">Лето 2020</div>
+                        </div>
+                        <div class="add-collection-wrap">
+                            <div class="add-collection">Новая коллекция</div>
+                        </div>
+                    </div>
+                    <div class="new-collection">
+                        <input type="text" class="controll__input new-coll-input"
+                               placeholder="Название новой коллекции">
+                        <div class="add-prod-btn add-new-coll">Добавить</div>
+                    </div>
+                    <div class="price-inputs">
+                        <input type="text" class="controll__input"
+                               placeholder="Старая цена">
+                        <input type="text" class="controll__input"
+                               placeholder="Новая цена">
+                    </div>
+                    <div class="add-photo-head">
+                        <span>Виден в каталоге:</span>
+                        <div class="catalog-toggle">
+                            <span>Да</span>
+                            <span>Нет</span>
+                        </div>
+                    </div>
+                    <div class="add-photo">
+                        <div class="add-photo-item add-drop">
+                            <img src="{% static 'img/icon/camera.svg' %}" alt="">
+                            <span>Добавить</span>
+                            <input id="add-photo" type="file">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <button type="submit" class="add-prod-btn">Добавить товар</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
