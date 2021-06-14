@@ -84,9 +84,11 @@
                             {% endif %}
                         </div>
                         <div class="taplink__text">
-                            {% for editor in item.editors.all %}
-                                {{ editor|safe }}
-                            {% endfor %}
+                            {% autoescape off %}
+                                {% for editor in item.editors.all %}
+                                    {{ editor}}
+                                {% endfor %}
+                            {% endautoescape %}
                         </div>
                         <div class="taplink__contacts">
                             <h5>

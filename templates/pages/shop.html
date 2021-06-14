@@ -19,9 +19,9 @@
                 Коллекции
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+                {% for object in object_list %}
+                    <a class="dropdown-item" type="button">{{ object.get_absolute_url }}</a>
+                {% endfor %}
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-4">

@@ -3,8 +3,8 @@ from django.db import models
 from django.urls import reverse
 
 from apps.shop.utils import (
-    main_image_upload_to, image_upload_to, create_unique_slug
-)
+    main_image_upload_to, image_upload_to, create_unique_slug,
+    )
 from apps.taplink.models import TapLink
 
 
@@ -27,9 +27,8 @@ class Collection(models.Model):
             self.slug = create_unique_slug(Collection, self.collection_name)
         return super().save(*args, **kwargs)
 
-
-    # def get_absolute_url(self):
-    #     return reverse('products_by_collection', kwargs={'slug': self.slug})
+    def get_absolute_url(self):
+        return reverse('collection_page', kwargs={'slug': self.slug})
 
 
 class Product(models.Model):
@@ -92,32 +91,32 @@ class ProductImage(models.Model):
         return reverse('product-detail_page', kwargs={'slug': self.product.slug})
 
 
-class Cart(models.Model):
-    cart_id = models.CharField(max_length=100, blank=True)
-    date_added = models.DateField(auto_now_add=True)
+# class Cart(models.Model):
+#     cart_id = models.CharField(max_length=100, blank=True)
+#     date_added = models.DateField(auto_now_add=True)
+#
+#     class Meta:
+#         ordering = ['date_added']
+#         db_table = 'Cart'
 
-    class Meta:
-        ordering = ['date_added']
-        db_table = 'Cart'
 
-
-class CartItem(models.Model):
-    product = models.ForeignKey(
-        to=Product, on_delete=models.CASCADE, related_name='items',
-        verbose_name='product'
-    )
-    cart = models.ForeignKey(
-        to=Cart, on_delete=models.CASCADE, related_name='items',
-        verbose_name='cart'
-    )
-    quantity = models.PositiveIntegerField(verbose_name='Product quantity')
-    active = models.BooleanField(default=True)
-
-    class Meta:
-        db_table = 'CartItem'
-
-    def sub_total(self):
-        return self.product.new_price * self.quantity
-
-    def __str__(self):
-        return self.product
+# class CartItem(models.Model):
+#     product = models.ForeignKey(
+#         to=Product, on_delete=models.CASCADE, related_name='items',
+#         verbose_name='product'
+#     )
+#     cart = models.ForeignKey(
+#         to=Cart, on_delete=models.CASCADE, related_name='items',
+#         verbose_name='cart'
+#     )
+#     quantity = models.PositiveIntegerField(verbose_name='Product quantity')
+#     active = models.BooleanField(default=True)
+#
+#     class Meta:
+#         db_table = 'CartItem'
+#
+#     def sub_total(self):
+#         return self.product.new_price * self.quantity
+#
+#     def __str__(self):
+#         return self.product

@@ -2,7 +2,7 @@ from django.urls import path
 
 from apps.shop.views import (
     ProductListView, ProductDetailView, CartView, ShopView, ProductsSoldView,
-    ProductAddFormView, ProductDeleteView
+    ProductAddFormView, ProductDeleteView, ProductCollectionListView
 )
 
 
@@ -13,5 +13,6 @@ urlpatterns = [
     path('products_sold/', ProductsSoldView.as_view(), name='products-sold_page'),
     path('cart/', CartView.as_view(), name='cart_page'),
     path('products/', ProductListView.as_view(), name='products_page'),
+    path('<slug:pathname>/<slug:slug>/', ProductCollectionListView.as_view(), name='collection_page'),
     path('<slug:pathname>/', ShopView.as_view(), name='shop_page'),
 ]

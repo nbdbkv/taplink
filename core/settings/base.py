@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.taplink',
     'apps.shop',
+    'django_cleanup.apps.CleanupConfig',
 
 ]
 

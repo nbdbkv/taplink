@@ -37,12 +37,12 @@ class ProductListView(LoginRequiredMixin, ListView):
 
 
 class ProductAddFormView(LoginRequiredMixin, FormView):
-    template_name = 'pages/products.html'
     form_class = ProductForm
+    template_name = 'pages/products.html'
 
     def form_valid(self, form):
         product = form.save(commit=False)
-        collection, _ = Collection.objects.get_or_create(
+        collection, is_created = Collection.objects.get_or_create(
             collection_name=self.request.POST.get('collection_name')
         )
         product.collection = collection
@@ -69,19 +69,41 @@ class ShopView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('search')
+        print(self.request.GET)
         if query:
             return Product.objects.filter(
-                Q(seller=self.request.user) &
+                # Q(seller=self.request.user) &
                 Q(product_name__icontains=query)
             )
         else:
-            return Product.objects.filter(seller=self.request.user)
+            return Product.objects.filter(is_available=True)
+
+
+class ProductCollectionListView(LoginRequiredMixin, ListView):
+    model = Collection
+    template_name = 'pages/shop.html'
+    # context_object_name = ''
+
+    def get_queryset(self):
+        return Collection.objects.filter(slug=self.kwargs['slug'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print('A' * 70, context)
+        return context
 
 
 class ProductDetailView(DetailView):
     model = Product
-    context_object_name = 'product'
     template_name = 'pages/product.html'
+    context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = ProductImage.objects.filter(
+            product__slug=self.kwargs['slug']
+        )
+        return context
 
 
 class ProductsSoldView(TemplateView):
@@ -90,23 +112,3 @@ class ProductsSoldView(TemplateView):
 
 class CartView(TemplateView):
     template_name = 'pages/cart.html'
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # logger.info('some info')
-    # logger.warning('some warning yellow')
-    # print(self.kwargs['pathname'])
-    # logger.error('some error red')
-    # product = TapLink.objects.filter(user=self.request.user).first()
-    # print(product)
-    # logger.success('some success green')
