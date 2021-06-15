@@ -21,17 +21,8 @@
 </div>
 <div class="container">
     <div class="prod-content">
-        <div class="prod-content-header">
-            <form action="" class="search">
-                <input type="text" class="search-input" placeholder="Поиск">
-                <button type="submit" class="search-btn"></button>
-            </form>
-            <div class="pagination-wrap">
-                {% include 'components/pagination.html' %}
-            </div>
-        </div>
         <div class="prod-table-wrap">
-            <table class="prod-table">
+            <table class="prod-table bought">
                 <tr>
                     <th>
                         <div>Название</div>
@@ -40,50 +31,33 @@
                         <div>Цена</div>
                     </th>
                     <th>
-                        <div>Дата добавления</div>
+                        <div>Количество</div>
                     </th>
                     <th>
-                        <div>Количество товара</div>
+                        <div>Имя Фамилия</div>
                     </th>
                     <th>
-                        <div>Коллекция</div>
+                        <div>Телефон</div>
                     </th>
                 </tr>
                 <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
                     <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
+                        <span>Шорты летние</span>
+                        <span class="gray">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        </span>
                     </td>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
                     <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
+                    <td>2 шт</td>
+                    <td>Фывов Алексей.</td>
+                    <td>+ 996 700 12 34 56</td>
                 </tr>
             </table>
+        </div>
+        <div class="prod-content-header bought">
+            <div class="pagination-wrap">
+                {% include 'components/pagination.html' %}
+            </div>
         </div>
     </div>
 </div>
@@ -138,6 +112,22 @@
                             <span>Добавить</span>
                             <input id="add-photo" type="file">
                         </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="add-photo-item">
+                            <div class="delete"></div>
+                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
                     </div>
                     <button type="submit" class="add-prod-btn">Добавить товар</button>
                 </div>
@@ -149,60 +139,4 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $('.add-textarea').on('input', function () {
-        this.style.height = "";
-        this.style.height = this.scrollHeight + "px";
-    })
-
-    $('.catalog-toggle').on('click', function () {
-        $(this).toggleClass('hide')
-    })
-
-    $('.add-collection').on('click', function () {
-        $('.new-collection').addClass('show')
-    })
-
-    $('.collection-item').on('click', function () {
-        $(this).toggleClass('active')
-    })
-
-    $('.add-new-coll').on('click', function () {
-        let collectionField = $('.new-coll-input')
-
-        if(collectionField.val() !== '') {
-            $('.collection-tags').append($('<div class="collection-item">'+ collectionField.val() + '</div>'))
-        }
-
-        collectionField.val('')
-    })
-</script>
-<script>
-    $(document).ready(function () {
-
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.add-photo').append('<div class="add-photo-item">' +
-                                                '<div class="delete"></div>' +
-                                                '<img class="product-img" src="'+ e.target.result +'" alt="">' +
-                                             '</div>')
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#add-photo").on('change', function () {
-            readURL(this);
-        });
-
-        $(document).on('click', '.add-photo-item .delete', function () {
-            $(this).parent().remove()
-        })
-
-    });
-</script>
 {% endblock %}

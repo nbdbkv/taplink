@@ -12,7 +12,7 @@ from apps.shop.models import Product, ProductImage, Collection
 from apps.taplink.models import TapLink
 
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductsView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'pages/products.html'
     context_object_name = 'products'
@@ -53,30 +53,30 @@ class ProductAddFormView(LoginRequiredMixin, FormView):
             ProductImage.objects.create(
                 image=image,
                 product=product)
-        return redirect('products_page')
+        return redirect('products')
 
 
 class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'pages/products.html'
-    success_url = reverse_lazy('products_page')
+    success_url = reverse_lazy('products')
 
 
-class ShopView(ListView):
-    model = Product
-    template_name = 'pages/shop.html'
-    context_object_name = 'products'
-
-    def get_queryset(self):
-        query = self.request.GET.get('search')
-        print(self.request.GET)
-        if query:
-            return Product.objects.filter(
-                # Q(seller=self.request.user) &
-                Q(product_name__icontains=query)
-            )
-        else:
-            return Product.objects.filter(is_available=True)
+# class ShopView(ListView):
+#     model = Product
+#     template_name = 'pages/shop.html'
+#     context_object_name = 'products'
+#
+#     def get_queryset(self):
+#         query = self.request.GET.get('search')
+#         print(self.request.GET)
+#         if query:
+#             return Product.objects.filter(
+#                 # Q(seller=self.request.user) &
+#                 Q(product_name__icontains=query)
+#             )
+#         else:
+#             return Product.objects.filter(is_available=True)
 
 
 class ProductCollectionListView(LoginRequiredMixin, ListView):
@@ -110,5 +110,46 @@ class ProductsSoldView(TemplateView):
     template_name = 'pages/products-sold.html'
 
 
+# class CartView(TemplateView):
+#     template_name = 'pages/cart.html'
+
+
+class ShopView(ListView):
+    model = Product
+    template_name = 'pages/shop.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        print(self.request.GET)
+        if query:
+            return Product.objects.filter(
+                # Q(seller=self.request.user) &
+                Q(product_name__icontains=query)
+            )
+        else:
+            return Product.objects.filter(is_available=True)
+
+
+class ShopOwnerView(TemplateView):
+    template_name = 'pages/shop-owner.html'
+
+
+class ShopInnerView(TemplateView):
+    template_name = 'pages/shop-inner.html'
+
+
 class CartView(TemplateView):
     template_name = 'pages/cart.html'
+
+
+class BoughtProductsView(TemplateView):
+    template_name = 'pages/bought-products.html'
+
+
+class CollectionView(TemplateView):
+    template_name = 'pages/collection.html'
+
+
+class BuyProductView(TemplateView):
+    template_name = 'pages/buy-product.html'

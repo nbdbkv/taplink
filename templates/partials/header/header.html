@@ -5,25 +5,14 @@
                 <a href="{% url 'index_page' %}" class="logo">
                     LOGOTYPE
                 </a>
-                <div class="header__right">
+                <div class="nav">
                     {% for link in taplink %}
-                        <a href="{% url 'shop_page' link.pathname %}" class="header__right">
-                        <span class="profile__text">
-                            Магазин
-                        </span>
-                        </a>
-                        <a href="{% url 'products_page' %}" class="header__right">
-                        <span class="profile__text">
-                            Товары
-                        </span>
-                        </a>
-                        <a href="{% url 'products-sold_page' %}" class="header__right">
-                        <span class="profile__text">
-                            Проданные товары
-                        </span>
-                        </a>
+                        <!--                активным nav-link добавить класс active-->
+                        <a href="{% url 'shop' link.pathname %}" class="nav-link page"><span>Страница</span></a>
+                        <a href="{% url 'products' %}" class="nav-link products"><span>Товары</span></a>
                     {% endfor %}
-
+                </div>
+                <div class="header__right">
                     <a href="{% url 'edit-profile' request.user.id %}" class="header__right">
                         <div class="profile__icon">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

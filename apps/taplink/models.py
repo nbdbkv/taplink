@@ -27,7 +27,7 @@ class TapLink(models.Model):
         return str(self.user)
 
     def get_absolute_url(self):
-        return reverse('shop_page', kwargs={'pathname': self.pathname})
+        return reverse('shop', kwargs={'pathname': self.pathname})
 
 
 class TapLinkEditor(models.Model):
