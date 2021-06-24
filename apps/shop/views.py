@@ -1,155 +1,156 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import (
     TemplateView, FormView, ListView, DetailView, DeleteView
 )
 from loguru import logger
 
-from apps.shop.forms import CollectionForm, ProductForm, ProductImageForm
+from apps.shop.forms import ProductForm, ProductImageForm
 from apps.shop.models import Product, ProductImage, Collection
 from apps.taplink.models import TapLink
 
 
+# Owner
 class ProductsView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'pages/products.html'
     context_object_name = 'products'
 
     def get_queryset(self):
-        query = self.request.GET.get('search')
-        if query:
+        if self.request.GET.get('search'):
             return Product.objects.filter(
-                Q(seller=self.request.user) &
-                Q(product_name__icontains=query)
+                Q(name__icontains=self.request.GET.get('search')) &
+                Q(owner__user=self.request.user) &
+                Q(is_available=True)
             )
         else:
-            return Product.objects.filter(seller=self.request.user)
+            return Product.objects.filter(
+                Q(owner__user=self.request.user) &
+                Q(is_available=True)
+            )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['collection_form'] = CollectionForm
         context['product_form'] = ProductForm
         context['image_form'] = ProductImageForm
-        context['pathname'] = TapLink.objects.get(user=self.request.user).pathname
+        context['collections'] = Collection.objects.filter()
+        context['pathname'] = TapLink.objects.get(
+            user=self.request.user).pathname
         return context
 
 
 class ProductAddFormView(LoginRequiredMixin, FormView):
-    form_class = ProductForm
     template_name = 'pages/products.html'
+    form_class = ProductForm
 
     def form_valid(self, form):
         product = form.save(commit=False)
-        collection, is_created = Collection.objects.get_or_create(
-            collection_name=self.request.POST.get('collection_name')
-        )
-        product.collection = collection
-        product.seller = self.request.user
+        product.owner = TapLink.objects.get(user=self.request.user)
         product.save()
-        images = self.request.FILES.getlist('image')
-        for image in images:
+        for image in self.request.FILES.getlist('images'):
             ProductImage.objects.create(
                 image=image,
                 product=product)
+        product.collections.set(list(Collection.objects.filter(name__in=form.data['collections'].split(','))))
         return redirect('products')
 
 
-class ProductDeleteView(DeleteView):
+def add_collection_with_ajax(request):
+    if request.method == 'POST':
+        collection = Collection()
+        collection.name = request.POST.get('collectionValue')
+        collection.save()
+    return render(request, 'pages/products.html')
+
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'pages/products.html'
     success_url = reverse_lazy('products')
 
 
-# class ShopView(ListView):
-#     model = Product
-#     template_name = 'pages/shop.html'
-#     context_object_name = 'products'
-#
-#     def get_queryset(self):
-#         query = self.request.GET.get('search')
-#         print(self.request.GET)
-#         if query:
-#             return Product.objects.filter(
-#                 # Q(seller=self.request.user) &
-#                 Q(product_name__icontains=query)
-#             )
-#         else:
-#             return Product.objects.filter(is_available=True)
+class BoughtProductsView(LoginRequiredMixin, TemplateView):
+    template_name = 'pages/bought-products.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        pass
 
 
-class ProductCollectionListView(LoginRequiredMixin, ListView):
+class CollectionView(LoginRequiredMixin, ListView):
     model = Collection
-    template_name = 'pages/shop.html'
-    # context_object_name = ''
+    template_name = 'pages/collection.html'
+    context_object_name = 'collections'
 
-    def get_queryset(self):
-        return Collection.objects.filter(slug=self.kwargs['slug'])
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print('A' * 70, context)
-        return context
+    # def get_queryset(self):
+    #     collections = Collection.objects.all().annotate(products_count=Count('name'))
+    #     return collections
 
 
-class ProductDetailView(DetailView):
+class ShopOwnerView(LoginRequiredMixin, ListView):
     model = Product
-    template_name = 'pages/product.html'
-    context_object_name = 'product'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['images'] = ProductImage.objects.filter(
-            product__slug=self.kwargs['slug']
-        )
-        return context
-
-
-class ProductsSoldView(TemplateView):
-    template_name = 'pages/products-sold.html'
-
-
-# class CartView(TemplateView):
-#     template_name = 'pages/cart.html'
-
-
-class ShopView(ListView):
-    model = Product
-    template_name = 'pages/shop.html'
+    template_name = 'pages/shop-owner.html'
     context_object_name = 'products'
 
     def get_queryset(self):
-        query = self.request.GET.get('search')
-        print(self.request.GET)
-        if query:
+        logger.success(self.kwargs)
+        if self.request.GET.get('search'):
             return Product.objects.filter(
-                # Q(seller=self.request.user) &
-                Q(product_name__icontains=query)
+                Q(name__icontains=self.request.GET.get('search')) &
+                Q(owner__user=self.request.user) &
+                Q(is_available=True)
             )
         else:
-            return Product.objects.filter(is_available=True)
+            return Product.objects.filter(
+                Q(owner__user=self.request.user) &
+                Q(is_available=True)
+            )
 
 
-class ShopOwnerView(TemplateView):
-    template_name = 'pages/shop-owner.html'
-
-
-class ShopInnerView(TemplateView):
-    template_name = 'pages/shop-inner.html'
+# Customer
+class BuyProductView(TemplateView):
+    template_name = 'pages/buy-product.html'
 
 
 class CartView(TemplateView):
     template_name = 'pages/cart.html'
 
 
-class BoughtProductsView(TemplateView):
-    template_name = 'pages/bought-products.html'
+class ShopInnerView(DetailView):
+    model = Product
+    template_name = 'pages/shop-inner.html'
+    context_object_name = 'product'
+    slug_field = 'product_slug'
 
 
-class CollectionView(TemplateView):
-    template_name = 'pages/collection.html'
+class ShopCustomerView(ListView):
+    model = Product
+    template_name = 'pages/shop.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        logger.success(self.kwargs)
+        if self.request.GET.get('search'):
+            return Product.objects.filter(
+                Q(name__icontains=self.request.GET.get('search')) &
+                Q(owner__pathname=self.kwargs['pathname']) &
+                Q(is_available=True)
+            )
+        else:
+            return Product.objects.filter(
+                Q(owner__pathname=self.kwargs['pathname']) &
+                Q(is_available=True)
+            )
 
 
-class BuyProductView(TemplateView):
-    template_name = 'pages/buy-product.html'
+class IndexCustomerView(TemplateView):
+    template_name = 'pages/index-shop.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['taplink'] = TapLink.objects.filter(
+            pathname=self.kwargs['pathname'])\
+        .prefetch_related('messengers')\
+        .prefetch_related('editors')
+        return context

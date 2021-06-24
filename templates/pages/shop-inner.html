@@ -4,130 +4,125 @@
 {% block title_page %}{% endblock %}
 
 {% block style-libs %}
-<link rel="stylesheet" href="{% static 'css/swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper.css' %}">
 {% endblock %}
 
 {% block style %}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="shop-header">
-        <a href="#!" class="shop-prev">
-            Вернуться назад
-        </a>
-        <div class="quantity">
-            <span>1</span>
-        </div>
-    </div>
-</div>
-<div class="shop-content">
-    <div class="container shop-inner">
-        <div>
-            <div class="swiper-container shop-swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                        <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                        <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                    </div>
-                </div>
-                <div class="swiper-button-prev shop-btn-prev">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.9091 13.0909H3.72458L7.31687 16.6832C7.74291 17.1092 7.74291 17.8 7.31687 18.226C7.10386 18.4389 6.82466 18.5455 6.54546 18.5455C6.26625 18.5455 5.98705 18.4389 5.77411 18.2259L0.319565 12.7714C-0.10647 12.3454 -0.10647 11.6546 0.319565 11.2286L5.77411 5.77406C6.20007 5.3481 6.89084 5.3481 7.31687 5.77406C7.74291 6.20003 7.74291 6.89079 7.31687 7.31683L3.72458 10.9091H22.9091C23.5116 10.9091 24 11.3976 24 12C24 12.6025 23.5116 13.0909 22.9091 13.0909Z"
-                              fill="#181818" fill-opacity="0.4"/>
-                    </svg>
-                </div>
-                <div class="swiper-pagination shop-pagination"></div>
-                <div class="swiper-button-next shop-btn-next">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.09091 13.0909H20.2754L16.6831 16.6832C16.2571 17.1092 16.2571 17.8 16.6831 18.226C16.8961 18.4389 17.1753 18.5455 17.4545 18.5455C17.7337 18.5455 18.0129 18.4389 18.2259 18.2259L23.6804 12.7714C24.1065 12.3454 24.1065 11.6546 23.6804 11.2286L18.2259 5.77406C17.7999 5.3481 17.1092 5.3481 16.6831 5.77406C16.2571 6.20003 16.2571 6.89079 16.6831 7.31683L20.2754 10.9091H1.09091C0.488436 10.9091 0 11.3976 0 12C0 12.6025 0.488436 13.0909 1.09091 13.0909Z"
-                              fill="#181818" fill-opacity="0.4"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="swiper-container shop-swiper-thumb">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                        <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                        <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="shop-inner-info">
-            <h2 class="title">
-                Пуловер темно синий с длинными рукавами
-            </h2>
-            <div class="price">
-                <span class="current-price">5400 сом</span>
-                <span class="old-price">6200 сом</span>
-            </div>
-            <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sollicitudin pellentesque feugiat nam ut arcu.
-                Lectus massa potenti diam a, tristique eleifend. Sed rhoncus vitae cras gravida egestas. Interdum morbi
-                tortor justo iaculis donec nunc, enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Sollicitudin pellentesque feugiat nam ut arcu. Lectus massa potenti diam a, tristique eleifend. Sed
-                rhoncus vitae cras gravida egestas. Interdum morbi tortor justo iaculis donec nunc, enim.Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit. Sollicitudin pellentesque feugiat nam ut arcu. Lectus massa
-                potenti diam a, tristique eleifend. Sed rhoncus vitae cras gravida egestas. Interdum morbi tortor justo
-                iaculis donec nunc, enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sollicitudin
-                pellentesque feugiat nam ut arcu. Lectus massa potenti diam a, tristique eleifend. Sed rhoncus vitae
-                cras gravida egestas. Interdum morbi tortor justo iaculis donec nunc, enim.
-            </p>
-            <h4>Коллекция</h4>
-            <div class="tags-flex">
-                <div class="tags-item">Лето 2020</div>
-                <div class="tags-item">Лето 2020</div>
-                <div class="tags-item">Лето 2020</div>
-                <div class="tags-item">Лето 2020</div>
-            </div>
-            <div class="add-to-cart">
-                Добавить в корзину
+    <div class="container">
+        <div class="shop-header">
+            <a href="{% url 'shop' pathname %}" class="shop-prev">
+                Вернуться назад
+            </a>
+            <div class="quantity">
+                <span>1</span>
             </div>
         </div>
     </div>
-</div>
+    <div class="shop-content">
+        <div class="container shop-inner">
+            <div>
+                <div class="swiper-container shop-swiper-container">
+                    <div class="swiper-wrapper">
+{#                        <div class="swiper-slide">#}
+{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
+{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
+{#                        </div>#}
+                        {% for image in images %}
+                            <div class="swiper-slide">
+                                <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-prev shop-btn-prev">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.9091 13.0909H3.72458L7.31687 16.6832C7.74291 17.1092 7.74291 17.8 7.31687 18.226C7.10386 18.4389 6.82466 18.5455 6.54546 18.5455C6.26625 18.5455 5.98705 18.4389 5.77411 18.2259L0.319565 12.7714C-0.10647 12.3454 -0.10647 11.6546 0.319565 11.2286L5.77411 5.77406C6.20007 5.3481 6.89084 5.3481 7.31687 5.77406C7.74291 6.20003 7.74291 6.89079 7.31687 7.31683L3.72458 10.9091H22.9091C23.5116 10.9091 24 11.3976 24 12C24 12.6025 23.5116 13.0909 22.9091 13.0909Z"
+                                  fill="#181818" fill-opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <div class="swiper-pagination shop-pagination"></div>
+                    <div class="swiper-button-next shop-btn-next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.09091 13.0909H20.2754L16.6831 16.6832C16.2571 17.1092 16.2571 17.8 16.6831 18.226C16.8961 18.4389 17.1753 18.5455 17.4545 18.5455C17.7337 18.5455 18.0129 18.4389 18.2259 18.2259L23.6804 12.7714C24.1065 12.3454 24.1065 11.6546 23.6804 11.2286L18.2259 5.77406C17.7999 5.3481 17.1092 5.3481 16.6831 5.77406C16.2571 6.20003 16.2571 6.89079 16.6831 7.31683L20.2754 10.9091H1.09091C0.488436 10.9091 0 11.3976 0 12C0 12.6025 0.488436 13.0909 1.09091 13.0909Z"
+                                  fill="#181818" fill-opacity="0.4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="swiper-container shop-swiper-thumb">
+                    <div class="swiper-wrapper">
+{#                        <div class="swiper-slide">#}
+{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
+{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
+{#                        </div>#}
+                        {% for image in images %}
+                            <div class="swiper-slide">
+                                <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="shop-inner-info">
+                <h2 class="title">
+                    {{ product.name }}
+                </h2>
+                <div class="price">
+                    <span class="current-price">{{ product.current_price }} сом</span>
+                    <span class="old-price">{{ product.old_price}} сом</span>
+                </div>
+                <p class="text">
+                    {{ product.description }}
+                </p>
+                <h4>Коллекция</h4>
+                <div class="tags-flex">
+                    <div class="tags-item">Лето 2020</div>
+                    <div class="tags-item">Лето 2020</div>
+                    <div class="tags-item">Лето 2020</div>
+                    <div class="tags-item">Лето 2020</div>
+                </div>
+                <div class="add-to-cart">
+                    Добавить в корзину
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'js/swiper.js' %}"></script>
-<script>
-    var swiperThumb = new Swiper(".shop-swiper-thumb", {
-        spaceBetween: 14,
-        slidesPerView: 6,
-        freeMode: true,
-        watchSlidesVisibility: true,
-        watchSlidesProgress: true,
-        breakpoints: {
-            280: {
-                spaceBetween: 5
-            },
-            1025: {
-                spaceBetween: 14
+    <script src="{% static 'js/swiper.js' %}"></script>
+    <script>
+        var swiperThumb = new Swiper(".shop-swiper-thumb", {
+            spaceBetween: 14,
+            slidesPerView: 6,
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+            breakpoints: {
+                280: {
+                    spaceBetween: 5
+                },
+                1025: {
+                    spaceBetween: 14
+                }
             }
-        }
-    });
-    var swiper2 = new Swiper(".shop-swiper-container", {
-        spaceBetween: 10,
-        navigation: {
-            nextEl: ".shop-btn-next",
-            prevEl: ".shop-btn-prev",
-        },
-        pagination: {
-            el: '.shop-pagination',
-            type: 'bullets'
-        },
-        thumbs: {
-            swiper: swiperThumb,
-        },
-    });
-</script>
+        });
+        var swiper2 = new Swiper(".shop-swiper-container", {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".shop-btn-next",
+                prevEl: ".shop-btn-prev",
+            },
+            pagination: {
+                el: '.shop-pagination',
+                type: 'bullets'
+            },
+            thumbs: {
+                swiper: swiperThumb,
+            },
+        });
+    </script>
 {% endblock %}

@@ -1,27 +1,27 @@
 from django import forms
 
-from .models import TapLink, TapLinkEditor, TapLinkMessenger
+from .models import TapLink, Editor, Messenger
 
 
-class TapLinkPathNameForm(forms.ModelForm):
+class PathNameForm(forms.ModelForm):
     class Meta:
         model = TapLink
         fields = ('pathname',)
 
 
-class TapLinkEditorForm(forms.ModelForm):
+class EditorForm(forms.ModelForm):
     class Meta:
-        model = TapLinkEditor
+        model = Editor
         fields = ('editor',)
 
 
-class TapLinkAvatarForm(forms.ModelForm):
+class AvatarForm(forms.ModelForm):
     class Meta:
         model = TapLink
         fields = ('avatar',)
 
 
-class TapLinkMessengerForm(forms.ModelForm):
+class MessengerForm(forms.ModelForm):
     class Meta:
-        model = TapLinkMessenger
+        model = Messenger
         fields = ('telegram', 'title_t', 'whatsapp', 'title_wa')

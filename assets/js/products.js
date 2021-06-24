@@ -1,5 +1,5 @@
 $('#id_collection').on('click', function(event) {
-    $("#id_collection_name").val($("#id_collection option:selected").text())
+    $("#id_name").val($("#id_collection option:selected").text())
 });
 
 

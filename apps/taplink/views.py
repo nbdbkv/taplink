@@ -5,10 +5,10 @@ from django.utils.text import slugify
 from django.views.generic import TemplateView, FormView
 
 from apps.taplink.forms import (
-    TapLinkPathNameForm, TapLinkEditorForm, TapLinkAvatarForm,
-    TapLinkMessengerForm
+    PathNameForm, EditorForm, AvatarForm,
+    MessengerForm
 )
-from .models import TapLink, TapLinkEditor, TapLinkMessenger
+from .models import TapLink, Editor, Messenger
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -17,18 +17,18 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pathname_form'] = TapLinkPathNameForm
-        context['editor_form'] = TapLinkEditorForm
-        context['avatar_form'] = TapLinkAvatarForm
-        context['messenger_form'] = TapLinkMessengerForm
+        context['pathname_form'] = PathNameForm
+        context['editor_form'] = EditorForm
+        context['avatar_form'] = AvatarForm
+        context['messenger_form'] = MessengerForm
         context['taplink'] = TapLink.objects.filter(user=self.request.user)\
             .prefetch_related('messengers').prefetch_related('editors')
         return context
 
 
-class TapLinkPathNameFormView(LoginRequiredMixin, FormView):
+class PathNameFormView(LoginRequiredMixin, FormView):
     template_name = 'pages/index.html'
-    form_class = TapLinkPathNameForm
+    form_class = PathNameForm
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
@@ -40,22 +40,22 @@ class TapLinkPathNameFormView(LoginRequiredMixin, FormView):
         return redirect('index_page')
 
 
-class TapLinkEditorFormView(LoginRequiredMixin, FormView):
+class EditorFormView(LoginRequiredMixin, FormView):
     template_name = 'pages/index.html'
-    form_class = TapLinkEditorForm
+    form_class = EditorForm
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        TapLinkEditor.objects.create(
+        Editor.objects.create(
             taplink=taplink,
             editor=form.cleaned_data["editor"],
         )
         return redirect('index_page')
 
 
-class TapLinkAvatarFormView(LoginRequiredMixin, FormView):
+class AvatarFormView(LoginRequiredMixin, FormView):
     template_name = 'pages/index.html'
-    form_class = TapLinkAvatarForm
+    form_class = AvatarForm
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
@@ -64,14 +64,14 @@ class TapLinkAvatarFormView(LoginRequiredMixin, FormView):
         return redirect('index_page')
 
 
-class TapLinkMessengerFormView(LoginRequiredMixin, FormView):
+class MessengerFormView(LoginRequiredMixin, FormView):
     template_name = 'pages/index.html'
-    form_class = TapLinkMessengerForm
+    form_class = MessengerForm
     success_url = reverse_lazy('index_page')
 
     def form_valid(self, form):
         taplink = TapLink.objects.filter(user=self.request.user).first()
-        TapLinkMessenger.objects.create(
+        Messenger.objects.create(
             taplink=taplink,
             telegram=form.cleaned_data["telegram"],
             title_t=form.cleaned_data["title_t"],

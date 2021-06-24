@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import TapLink, TapLinkEditor, TapLinkMessenger
+from .models import TapLink, Editor, Messenger
 
 
 @admin.register(TapLink)
@@ -8,11 +8,11 @@ class TapLinkAdmin(admin.ModelAdmin):
     list_display = ('pathname', 'avatar', 'user')
 
 
-@admin.register(TapLinkEditor)
-class TapLinkEditorAdmin(admin.ModelAdmin):
+@admin.register(Editor)
+class EditorAdmin(admin.ModelAdmin):
     list_display = ('editor',)
 
 
-@admin.register(TapLinkMessenger)
-class TapLinkMessengerAdmin(admin.ModelAdmin):
+@admin.register(Messenger)
+class MessengerAdmin(admin.ModelAdmin):
     list_display = ('telegram', 'title_t', 'whatsapp', 'title_wa')

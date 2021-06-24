@@ -3,20 +3,13 @@ from django import forms
 from .models import Collection, Product, ProductImage
 
 
-class CollectionForm(forms.ModelForm):
-
-    class Meta:
-        model = Collection
-        fields = ('collection_name',)
-
-
 class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
         fields = (
-            'product_name', 'description', 'collection', 'new_price',
-            'old_price', 'is_available', 'quantity', 'main_image'
+            'name', 'description', 'old_price', 'current_price',
+            'quantity', 'is_available'
         )
 
 

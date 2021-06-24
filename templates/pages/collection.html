@@ -8,171 +8,173 @@
 {% block style %}{% endblock %}
 
 {% block content %}
-<div class="products-header-wrap">
-    <div class="container">
-        <div class="products-header">
-            <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
-            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="prod-content">
-        <div class="prod-table-wrap">
-            <table class="prod-table bought collection">
-                <tr>
-                    <th>
-                        <div>Название коллекции</div>
-                    </th>
-                    <th>
-                        <div>Количество товара</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>Лето 2020</td>
-                    <td>16</td>
-                </tr>
-            </table>
-        </div>
-        <div class="prod-content-header bought">
-            <div class="pagination-wrap">
-                {% include 'components/pagination.html' %}
+    <div class="products-header-wrap">
+        <div class="container">
+            <div class="products-header">
+                <!--        актиным link добавить класс active-->
+                <a href="{% url 'shop' pathname_context %}" class="link">Перейти в магазин</a>
+                <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
+                <a href="{% url 'bought-products' %}" class="link">Купленные товары</a>
+                <a href="{% url 'collection' %}" class="link">Коллекция</a>
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal micromodal-slide" id="add-product" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container add-product" role="dialog" aria-modal="true"
-             aria-labelledby="modal-title">
-            <form action="">
-                <div class="controll__block add-modal">
-                    <div class="controll__block-head">
-                        <h5>Добавить товар</h5>
-                        <div class="controll__block-close" aria-label="Close modal"
-                             data-micromodal-close>
-                        </div>
-                    </div>
-                    <input type="text" class="controll__input "
-                           placeholder="Название товара">
-                    <textarea class="controll__input add-textarea" placeholder="Описание товара"></textarea>
-                    <div class="collection">
-                        <div class="collection-tags">
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                        </div>
-                        <div class="add-collection-wrap">
-                            <div class="add-collection">Новая коллекция</div>
-                        </div>
-                    </div>
-                    <div class="new-collection">
-                        <input type="text" class="controll__input new-coll-input"
-                               placeholder="Название новой коллекции">
-                        <div class="add-prod-btn add-new-coll">Добавить</div>
-                    </div>
-                    <div class="price-inputs">
-                        <input type="text" class="controll__input"
-                               placeholder="Старая цена">
-                        <input type="text" class="controll__input"
-                               placeholder="Новая цена">
-                    </div>
-                    <div class="add-photo-head">
-                        <span>Виден в каталоге:</span>
-                        <div class="catalog-toggle">
-                            <span>Да</span>
-                            <span>Нет</span>
-                        </div>
-                    </div>
-                    <div class="add-photo">
-                        <div class="add-photo-item add-drop">
-                            <img src="{% static 'img/icon/camera.svg' %}" alt="">
-                            <span>Добавить</span>
-                            <input id="add-photo" type="file">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                        <div class="add-photo-item">
-                            <div class="delete"></div>
-                            <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
-                        </div>
-                    </div>
-                    <button type="submit" class="add-prod-btn">Добавить товар</button>
+    <div class="container">
+        <div class="prod-content">
+            <div class="prod-table-wrap">
+                <table class="prod-table bought collection">
+                    <tr>
+                        <th>
+                            <div>Название коллекции</div>
+                        </th>
+                        <th>
+                            <div>Количество товара</div>
+                        </th>
+                    </tr>
+                    {% for collection in collections %}
+                        <tr>
+                            <td>{{ collection.name }}</td>
+                            <td>{{ collection.products.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="prod-content-header bought">
+                <div class="pagination-wrap">
+                    {% include 'components/pagination.html' %}
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal micromodal-slide" id="add-collection" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container add-product" role="dialog" aria-modal="true"
-             aria-labelledby="modal-title">
-            <form action="">
-                <div class="controll__block add-modal">
-                    <div class="controll__block-head">
-                        <h5>Коллекция</h5>
-                        <div class="controll__block-close" aria-label="Close modal"
-                             data-micromodal-close>
+    <div class="modal micromodal-slide" id="add-product" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container add-product" role="dialog" aria-modal="true"
+                 aria-labelledby="modal-title">
+                <form action="">
+                    <div class="controll__block add-modal">
+                        <div class="controll__block-head">
+                            <h5>Добавить товар</h5>
+                            <div class="controll__block-close" aria-label="Close modal"
+                                 data-micromodal-close>
+                            </div>
                         </div>
-                    </div>
-                    <div class="add-coll-head">
-                        <input class="controll__input" type="text" placeholder="Введите название товара">
-                        <div class="add-prod-btn add-collection-btn">Добавить</div>
-                    </div>
-                    <div class="add-coll-flex">
-                        <div>Товары</div>
-                        <div class="collection-itm">
-                            <span>Летние штаны</span>
-                            <span class="delete"></span>
+                        <input type="text" class="controll__input "
+                               placeholder="Название товара">
+                        <textarea class="controll__input add-textarea" placeholder="Описание товара"></textarea>
+                        <div class="collection">
+                            <div class="collection-tags">
+                                <div class="collection-item">Лето 2020</div>
+                                <div class="collection-item">Лето 2020</div>
+                                <div class="collection-item">Лето 2020</div>
+                                <div class="collection-item">Лето 2020</div>
+                            </div>
+                            <div class="add-collection-wrap">
+                                <div class="add-collection">Новая коллекция</div>
+                            </div>
                         </div>
-                        <div class="collection-itm">
-                            <span>Летние штаны</span>
-                            <span class="delete"></span>
+                        <div class="new-collection">
+                            <input type="text" class="controll__input new-coll-input"
+                                   placeholder="Название новой коллекции">
+                            <div class="add-prod-btn add-new-coll">Добавить</div>
                         </div>
+                        <div class="price-inputs">
+                            <input type="text" class="controll__input"
+                                   placeholder="Старая цена">
+                            <input type="text" class="controll__input"
+                                   placeholder="Новая цена">
+                        </div>
+                        <div class="add-photo-head">
+                            <span>Виден в каталоге:</span>
+                            <div class="catalog-toggle">
+                                <span>Да</span>
+                                <span>Нет</span>
+                            </div>
+                        </div>
+                        <div class="add-photo">
+                            <div class="add-photo-item add-drop">
+                                <img src="{% static 'img/icon/camera.svg' %}" alt="">
+                                <span>Добавить</span>
+                                <input id="add-photo" type="file">
+                            </div>
+                            <div class="add-photo-item">
+                                <div class="delete"></div>
+                                <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                            </div>
+                            <div class="add-photo-item">
+                                <div class="delete"></div>
+                                <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                            </div>
+                            <div class="add-photo-item">
+                                <div class="delete"></div>
+                                <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                            </div>
+                            <div class="add-photo-item">
+                                <div class="delete"></div>
+                                <img class="product-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                            </div>
+                        </div>
+                        <button type="submit" class="add-prod-btn">Добавить товар</button>
                     </div>
-                    <div class="flex">
-                        <button type="submit" class="add-prod-btn">Сохранить</button>
-                        <div class="add-prod-btn delete">Удалить коллекцию</div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="modal micromodal-slide" id="add-collection" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container add-product" role="dialog" aria-modal="true"
+                 aria-labelledby="modal-title">
+                <form action="">
+                    <div class="controll__block add-modal">
+                        <div class="controll__block-head">
+                            <h5>Коллекция</h5>
+                            <div class="controll__block-close" aria-label="Close modal"
+                                 data-micromodal-close>
+                            </div>
+                        </div>
+                        <div class="add-coll-head">
+                            <input class="controll__input" type="text" placeholder="Введите название товара">
+                            <div class="add-prod-btn add-collection-btn">Добавить</div>
+                        </div>
+                        <div class="add-coll-flex">
+                            <div>Товары</div>
+                            <div class="collection-itm">
+                                <span>Летние штаны</span>
+                                <span class="delete"></span>
+                            </div>
+                            <div class="collection-itm">
+                                <span>Летние штаны</span>
+                                <span class="delete"></span>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <button type="submit" class="add-prod-btn">Сохранить</button>
+                            <div class="add-prod-btn delete">Удалить коллекцию</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $('.prod-table.bought.collection tr:not(:first-child)').on('click', function () {
-        MicroModal.show('add-collection')
-    })
+    <script>
+        $('.prod-table.bought.collection tr:not(:first-child)').on('click', function () {
+            MicroModal.show('add-collection')
+        })
 
-    $('.add-collection-btn').on('click', function () {
-        $('.add-coll-flex').append($('<div class="collection-itm"><span>'+$(this).siblings('.controll__input').val() +
-        '</span><span class="delete"></span></div>'))
+        $('.add-collection-btn').on('click', function () {
+            $('.add-coll-flex').append($('<div class="collection-itm"><span>'+$(this).siblings('.controll__input').val() +
+                '</span><span class="delete"></span></div>'))
 
-        $(this).siblings('.controll__input').val('')
-    })
+            $(this).siblings('.controll__input').val('')
+        })
 
-    $('.add-prod-btn.delete').on('click', function (){
-        $('.collection-itm').remove()
-    })
-</script>
+        $('.add-prod-btn.delete').on('click', function (){
+            $('.collection-itm').remove()
+        })
+    </script>
 {% endblock %}

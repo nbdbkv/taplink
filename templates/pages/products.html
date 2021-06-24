@@ -8,201 +8,234 @@
 {% block style %}{% endblock %}
 
 {% block content %}
-<div class="products-header-wrap">
-    <div class="container">
-        <div class="products-header">
-            <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
-            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="prod-content">
-        <div class="prod-content-header">
-            <form action="" class="search">
-                <input type="text" class="search-input" placeholder="Поиск">
-                <button type="submit" class="search-btn"></button>
-            </form>
-            <div class="pagination-wrap">
-                {% include 'components/pagination.html' %}
+    <div class="products-header-wrap">
+        <div class="container">
+            <div class="products-header">
+                <!--        активным link добавить класс active-->
+                <a href="{% url 'shop' pathname_context %}" class="link">Перейти в магазин</a>
+                <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
+                <a href="{% url 'bought-products' %}" class="link">Купленные товары</a>
+                <a href="{% url 'collection' %}" class="link">Коллекция</a>
             </div>
         </div>
-        <div class="prod-table-wrap">
-            <table class="prod-table">
-                <tr>
-                    <th>
-                        <div>Название</div>
-                    </th>
-                    <th>
-                        <div>Цена</div>
-                    </th>
-                    <th>
-                        <div>Дата добавления</div>
-                    </th>
-                    <th>
-                        <div>Количество товара</div>
-                    </th>
-                    <th>
-                        <div>Коллекция</div>
-                    </th>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Шорты летние</td>
-                    <td><span class="old-price">12 000 сом</span><span>12 000 сом</span></td>
-                    <td>12. 10. 2020</td>
-                    <td>12 шт.</td>
-                    <td>
-                        <div class="tags">
-                            <div class="tags-flex">
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                                <div class="tag-item">Лето 2020</div>
-                            </div>
-                            <div class="delete">Удалить</div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
     </div>
-</div>
-
-<div class="modal micromodal-slide" id="add-product" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container add-product" role="dialog" aria-modal="true"
-             aria-labelledby="modal-title">
-            <form action="">
-                <div class="controll__block add-modal">
-                    <div class="controll__block-head">
-                        <h5>Добавить товар</h5>
-                        <div class="controll__block-close" aria-label="Close modal"
-                             data-micromodal-close>
-                        </div>
-                    </div>
-                    <input type="text" class="controll__input "
-                           placeholder="Название товара">
-                    <textarea class="controll__input add-textarea" placeholder="Описание товара"></textarea>
-                    <div class="collection">
-                        <div class="collection-tags">
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                            <div class="collection-item">Лето 2020</div>
-                        </div>
-                        <div class="add-collection-wrap">
-                            <div class="add-collection">Новая коллекция</div>
-                        </div>
-                    </div>
-                    <div class="new-collection">
-                        <input type="text" class="controll__input new-coll-input"
-                               placeholder="Название новой коллекции">
-                        <div class="add-prod-btn add-new-coll">Добавить</div>
-                    </div>
-                    <div class="price-inputs">
-                        <input type="text" class="controll__input"
-                               placeholder="Старая цена">
-                        <input type="text" class="controll__input"
-                               placeholder="Новая цена">
-                    </div>
-                    <div class="add-photo-head">
-                        <span>Виден в каталоге:</span>
-                        <div class="catalog-toggle">
-                            <span>Да</span>
-                            <span>Нет</span>
-                        </div>
-                    </div>
-                    <div class="add-photo">
-                        <div class="add-photo-item add-drop">
-                            <img src="{% static 'img/icon/camera.svg' %}" alt="">
-                            <span>Добавить</span>
-                            <input id="add-photo" type="file">
-                        </div>
-                    </div>
-                    <button type="submit" class="add-prod-btn">Добавить товар</button>
+    <div class="container">
+        <div class="prod-content">
+            <div class="prod-content-header">
+                <form action="" class="search">
+                    <input name="search" type="text" class="search-input" placeholder="Поиск">
+                    <button type="submit" class="search-btn"></button>
+                </form>
+                <div class="pagination-wrap">
+                    {% include 'components/pagination.html' %}
                 </div>
-            </form>
+            </div>
+            <div class="prod-table-wrap">
+                <table class="prod-table">
+                    <tr>
+                        <th>
+                            <div>Название</div>
+                        </th>
+                        <th>
+                            <div>Цена</div>
+                        </th>
+                        <th>
+                            <div>Дата добавления</div>
+                        </th>
+                        <th>
+                            <div>Количество товара</div>
+                        </th>
+                        <th>
+                            <div>Коллекция</div>
+                        </th>
+                    </tr>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td><span class="old-price">{{ product.old_price }}</span><span>{{ product.current_price }}</span></td>
+                            <td>{{ product.created|date:'d.m.y' }}</td>
+                            <td>{{ product.quantity }} шт.</td>
+                            <td>
+                                <div class="tags">
+                                    <div class="tags-flex">
+                                        {% for collection in product.collections.all %}
+                                            <div class="tag-item">{{ collection.name }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="delete">
+                                        <form action="{% url 'product-delete' product.slug %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit">Удалить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="modal micromodal-slide" id="add-product" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container add-product" role="dialog" aria-modal="true"
+                 aria-labelledby="modal-title">
+                <form action="{% url 'product-add' %}" id="add" data-url="{% url 'collection-add' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="controll__block add-modal">
+                        <div class="controll__block-head">
+                            <h5>Добавить товар</h5>
+                            <div class="controll__block-close" aria-label="Close modal"
+                                 data-micromodal-close>
+                            </div>
+                        </div>
+                        {#                                                {{ images_form.as_p }}#}
+                        <input name="name" type="text" class="controll__input"
+                               placeholder="Название товара">
+                        <textarea name="description" class="controll__input add-textarea" placeholder="Описание товара"></textarea>
+                        <input name="collections" id="id_collections" type="hidden" class="controll__input"
+                               placeholder="Hidden collections">
+                        <div class="collection">
+                            <div class="collection-tags">
+                                {% for collection in collections %}
+                                    <div class="collection-item">{{ collection.name }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="add-collection-wrap">
+                                <div class="add-collection">Новая коллекция</div>
+                            </div>
+                        </div>
+                        <div class="new-collection">
+                            <input type="text" id="add_collection" class="controll__input new-coll-input"
+                                   placeholder="Название новой коллекции">
+                            <div id="submit_collection" class="add-prod-btn add-new-coll">Добавить</div>
+                        </div>
+                        <div class="price-inputs">
+                            <input name="old_price" type="text" class="controll__input"
+                                   placeholder="Старая цена">
+                            <input name="current_price" type="text" class="controll__input"
+                                   placeholder="Новая цена">
+                        </div>
+                        <input name="quantity" type="text" class="controll__input"
+                               placeholder="Количество товара">
+                        <br>
+                        <input name="is_available" id="id_is_available" type="hidden" class="controll__input"
+                               placeholder="Hidden boolean">
+                        <div class="add-photo-head">
+                            <span>Виден в каталоге:</span>
+                            <div class="catalog-toggle">
+                                <span>Да</span>
+                                <span>Нет</span>
+                            </div>
+                        </div>
+                        <div class="add-photo">
+                            <div class="add-photo-item add-drop">
+                                <img src="{% static 'img/icon/camera.svg' %}" alt="">
+                                <span>Добавить</span>
+                                <input name="images" multiple id="add-photo" type="file">
+                            </div>
+                        </div>
+                        <button type="submit" class="add-prod-btn">Добавить товар</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $('.add-textarea').on('input', function () {
-        this.style.height = "";
-        this.style.height = this.scrollHeight + "px";
-    })
-
-    $('.catalog-toggle').on('click', function () {
-        $(this).toggleClass('hide')
-    })
-
-    $('.add-collection').on('click', function () {
-        $('.new-collection').addClass('show')
-    })
-
-    $('.collection-item').on('click', function () {
-        $(this).toggleClass('active')
-    })
-
-    $('.add-new-coll').on('click', function () {
-        let collectionField = $('.new-coll-input')
-
-        if(collectionField.val() !== '') {
-            $('.collection-tags').append($('<div class="collection-item">'+ collectionField.val() + '</div>'))
-        }
-
-        collectionField.val('')
-    })
-</script>
-<script>
-    $(document).ready(function () {
-
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.add-photo').append('<div class="add-photo-item">' +
-                                                '<div class="delete"></div>' +
-                                                '<img class="product-img" src="'+ e.target.result +'" alt="">' +
-                                             '</div>')
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#add-photo").on('change', function () {
-            readURL(this);
-        });
-
-        $(document).on('click', '.add-photo-item .delete', function () {
-            $(this).parent().remove()
+    <script>
+        $('.add-textarea').on('input', function () {
+            this.style.height = "";
+            this.style.height = this.scrollHeight + "px";
         })
 
-    });
-</script>
+        let defaultBoolean = 'True'
+
+        $('#id_is_available').val(defaultBoolean)
+
+        $('.catalog-toggle').on('click', function () {
+            $(this).toggleClass('hide')
+            if ($(this).hasClass('hide')){
+                $('#id_is_available').val('False')
+            }else{
+                $('#id_is_available').val('True')
+            }
+        })
+
+        $('.add-collection').on('click', function () {
+            $('.new-collection').addClass('show')
+        })
+
+        let arrayCollection = []
+
+        $('.collection-item').on('click', function () {
+            $(this).toggleClass('active')
+            if ($(this).hasClass('active')){
+                arrayCollection.push($(this).text())
+            }
+
+            $('#id_collections').val(arrayCollection.map(c => c))
+
+        })
+
+        $('.add-new-coll').on('click', function () {
+            let collectionField = $('.new-coll-input')
+
+            $('#id_collections').val(collectionField.val())
+
+            if(collectionField.val() !== '') {
+                $('.collection-tags').append($('<div class="collection-item">'+ collectionField.val() + '</div>'))
+                arrayCollection.push(collectionField.val())
+                $('#id_collections').val(arrayCollection.map(c => c))
+            }
+        })
+
+        $(document).ready(function () {
+            $('#submit_collection').on('click', function () {
+                $.ajax({
+                    method:'POST',
+                    url: $("#add").attr("data-url"),
+                    data:{
+                        collectionValue: $('#add_collection').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function() {
+                        alert('Collection successfully posted');
+                    },
+                });
+                $('#add_collection').val('')
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            let readURL = function (input) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.add-photo').append('<div class="add-photo-item">' +
+                            '<div class="delete"></div>' +
+                            '<img class="product-img" src="'+ e.target.result +'" alt="">' +
+                            '</div>')
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#add-photo").on('change', function () {
+                readURL(this);
+            });
+
+            $(document).on('click', '.add-photo-item .delete', function () {
+                $(this).parent().remove()
+            })
+
+        });
+    </script>
 {% endblock %}

@@ -12,10 +12,10 @@
     <div class="container">
         <div class="products-header">
             <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
+            <a href="{% url 'shop' pathname_context %}" class="link">Перейти в магазин</a>
             <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
+            <a href="{% url 'bought-products' %}" class="link">Купленные товары</a>
+            <a href="{% url 'collection' %}" class="link">Коллекция</a>
         </div>
     </div>
 </div>

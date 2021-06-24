@@ -19,7 +19,7 @@ class TapLink(models.Model):
         verbose_name='Avatar'
     )
     user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, related_name='taplinks',
+        CustomUser, on_delete=models.CASCADE, related_name='taplink',
         verbose_name='User'
     )
 
@@ -27,10 +27,10 @@ class TapLink(models.Model):
         return str(self.user)
 
     def get_absolute_url(self):
-        return reverse('shop', kwargs={'pathname': self.pathname})
+        return reverse('shop-owner', kwargs={'pathname': self.pathname})
 
 
-class TapLinkEditor(models.Model):
+class Editor(models.Model):
     editor = models.TextField(verbose_name='Editor')
     taplink = models.ForeignKey(
         to=TapLink, on_delete=models.CASCADE, related_name='editors',
@@ -41,7 +41,7 @@ class TapLinkEditor(models.Model):
         return self.editor
 
 
-class TapLinkMessenger(models.Model):
+class Messenger(models.Model):
     telegram = models.CharField(
         max_length=50, null=True, blank=True, verbose_name='Telegram'
     )
@@ -74,7 +74,7 @@ class TapLinkMessenger(models.Model):
 def create_save_taplink(sender, instance, created, **kwargs):
     if created:
         TapLink.objects.create(user=instance)
-        instance.taplinks.save()
+        instance.taplink.save()
 
 
 post_save.connect(create_save_taplink, sender=CustomUser)

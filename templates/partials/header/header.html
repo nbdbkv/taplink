@@ -6,11 +6,9 @@
                     LOGOTYPE
                 </a>
                 <div class="nav">
-                    {% for link in taplink %}
-                        <!--                активным nav-link добавить класс active-->
-                        <a href="{% url 'shop' link.pathname %}" class="nav-link page"><span>Страница</span></a>
-                        <a href="{% url 'products' %}" class="nav-link products"><span>Товары</span></a>
-                    {% endfor %}
+                    <!--                активным nav-link добавить класс active-->
+                    <a href="{% url 'index_page' %}" class="nav-link page"><span>Главная страница</span></a>
+                    <a href="{% url 'products' %}" class="nav-link products"><span>Товары</span></a>
                 </div>
                 <div class="header__right">
                     <a href="{% url 'edit-profile' request.user.id %}" class="header__right">
