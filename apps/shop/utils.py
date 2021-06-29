@@ -21,8 +21,3 @@ def create_unique_slug(klass, field, instance=None):
         unique_slug = f'{origin_slug}-{numb}'
         numb += 1
     return unique_slug
-
-
-# class ProductAddMixin:
-#
-#     def get_user_context(self):

@@ -2,8 +2,9 @@ from django.urls import path
 
 from apps.shop.views import (
     ProductsView, ProductAddFormView, ProductDeleteView, BoughtProductsView,
-    CollectionView, ShopOwnerView, BuyProductView, CartView, ShopInnerView,
-    ShopCustomerView, IndexCustomerView, add_collection_with_ajax
+    CollectionView, ProductOwnerView, ShopOwnerView, BuyProductView, CartView,
+    ProductCustomerView, ShopCustomerView, IndexCustomerView,
+    add_collection_with_ajax
 )
 
 
@@ -15,12 +16,13 @@ urlpatterns = [
     path('delete/<slug:slug>/', ProductDeleteView.as_view(), name='product-delete'),
     path('bought-products/', BoughtProductsView.as_view(), name='bought-products'),
     path('collection/', CollectionView.as_view(), name='collection'),
-    path('<slug:pathname>/', ShopOwnerView.as_view(), name='shop-owner'),
+    path('<slug:shop_owner>/<slug:product_owner>/', ProductOwnerView.as_view(), name='product-owner'),
+    path('<slug:shop_owner>/', ShopOwnerView.as_view(), name='shop-owner'),
 
     # Customer
     path('customer/buy-product/', BuyProductView.as_view(), name='buy-product'),
     path('customer/cart/', CartView.as_view(), name='cart'),
-    path('customer/shop/<slug:pathname>/<slug:product_slug>/', ShopInnerView.as_view(), name='shop-inner'),
-    path('customer/shop/<slug:pathname>/', ShopCustomerView.as_view(), name='shop'),
-    path('customer/<slug:pathname>/', IndexCustomerView.as_view(), name='index-customer'),
+    path('customer/shop/<slug:shop_customer>/<slug:product_customer>/', ProductCustomerView.as_view(), name='product-customer'),
+    path('customer/shop/<slug:shop_customer>/', ShopCustomerView.as_view(), name='shop-customer'),
+    path('customer/<slug:shop_customer>/', IndexCustomerView.as_view(), name='index-customer'),
 ]

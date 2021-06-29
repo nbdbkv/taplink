@@ -13,9 +13,9 @@
             <a href="{% url 'products' %}" class="shop-prev">
                 Вернуться назад
             </a>
-            <div class="quantity">
-                <span>1</span>
-            </div>
+{#            <div class="quantity">#}
+{#                <span>1</span>#}
+{#            </div>#}
         </div>
     </div>
     <div class="shop-content">
@@ -47,7 +47,9 @@
                     <div class="shop-item">
                         <div class="shop-img-wrap">
                             <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                            <img src="{{ item.images.first.image.url }}" alt="" class="shop-img">
+                            <a href="{{ item.get_absolute_url_for_owner }}">
+                                <img src="{{ item.images.first.image.url }}" alt="" class="shop-img">
+                            </a>
                         </div>
                         <h3 class="shop-item-ttl">{{ item.name }}</h3>
                         <h4 class="shop-item-subttl">{{ item.description|truncatechars:70 }}</h4>

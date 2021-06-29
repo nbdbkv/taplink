@@ -15,7 +15,7 @@
                     <h4 class="taplink__title">
                         {% for link in taplink %}
                             {% if link.pathname %}
-                                {{ link.get_absolute_url }}
+                                {{ link.get_absolute_url_for_owner }}
                             {% else %}
                                 Ссылка на ваш Таплинк
                             {% endif %}
@@ -32,8 +32,8 @@
                     <h4 class="taplink__title">
                         {% for link in taplink %}
                             {% if link.pathname %}
-                                <a href="{{ link.get_absolute_url }}" class="taplink__link" id="taplink-link" target="_blank">
-                                    http://127.0.0.1:8000{{ link.get_absolute_url }}
+                                <a href="{{ link.get_absolute_url_for_owner }}" class="taplink__link" id="taplink-link" target="_blank">
+                                    http://127.0.0.1:8000{{ link.get_absolute_url_for_owner }}
                                 </a>
                             {% endif %}
                         {% endfor %}
@@ -175,7 +175,7 @@
                         </button>
                     </div>
                     {% for link in taplink %}
-                        <a href="{{ link.get_absolute_url }}" class="taplink__box-btn shop-btn">Перейти в магазин</a>
+                        <a href="{{ link.get_absolute_url_for_owner }}" class="taplink__box-btn shop-btn">Перейти в магазин</a>
                     {% endfor %}
                 </div>
                 </div>

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Collection, Product, ProductImage
+from .models import Product, ProductImage
 
 
 class ProductForm(forms.ModelForm):

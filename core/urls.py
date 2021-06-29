@@ -12,6 +12,8 @@ urlpatterns = [
     path('', include('apps.taplink.urls')),
     path('', include('apps.shop.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('silk/', include('silk.urls', namespace='silk')),
+
 ]
 
 if settings.DEBUG:

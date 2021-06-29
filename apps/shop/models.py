@@ -38,9 +38,13 @@ class Product(models.Model):
         """Return product by name."""
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url_for_owner(self):
         """Return a string that can be used to refer to the object over HTTP."""
-        return reverse('shop-inner', kwargs={'slug': self.owner.pathname, 'product_slug': self.slug})
+        return reverse('product-owner', kwargs={'shop_owner': self.owner.pathname, 'product_owner': self.slug})
+
+    def get_absolute_url_for_customer(self):
+        """Return a string that can be used to refer to the object over HTTP."""
+        return reverse('product-customer', kwargs={'shop_customer': self.owner.pathname, 'product_customer': self.slug})
 
     def save(self, *args, **kwargs):
         """Save the current instance with a unique slug."""

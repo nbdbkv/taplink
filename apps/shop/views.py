@@ -71,7 +71,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('products')
 
 
-class BoughtProductsView(LoginRequiredMixin, TemplateView):
+class BoughtProductsView(LoginRequiredMixin, ListView):
     template_name = 'pages/bought-products.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -86,6 +86,13 @@ class CollectionView(LoginRequiredMixin, ListView):
     # def get_queryset(self):
     #     collections = Collection.objects.all().annotate(products_count=Count('name'))
     #     return collections
+
+
+class ProductOwnerView(DetailView):
+    model = Product
+    template_name = 'pages/product-owner.html'
+    context_object_name = 'product'
+    slug_url_kwarg = 'product_owner'
 
 
 class ShopOwnerView(LoginRequiredMixin, ListView):
@@ -117,11 +124,11 @@ class CartView(TemplateView):
     template_name = 'pages/cart.html'
 
 
-class ShopInnerView(DetailView):
+class ProductCustomerView(DetailView):
     model = Product
     template_name = 'pages/shop-inner.html'
     context_object_name = 'product'
-    slug_field = 'product_slug'
+    slug_url_kwarg = 'product_customer'
 
 
 class ShopCustomerView(ListView):
@@ -145,12 +152,10 @@ class ShopCustomerView(ListView):
 
 
 class IndexCustomerView(TemplateView):
-    template_name = 'pages/index-shop.html'
+    template_name = 'pages/index-customer.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['taplink'] = TapLink.objects.filter(
-            pathname=self.kwargs['pathname'])\
-        .prefetch_related('messengers')\
-        .prefetch_related('editors')
+        context['taplink'] = TapLink.objects.filter(pathname=self.kwargs['pathname'])\
+            .prefetch_related('messengers').prefetch_related('editors')
         return context

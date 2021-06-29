@@ -26,8 +26,11 @@ class TapLink(models.Model):
     def __str__(self):
         return str(self.user)
 
-    def get_absolute_url(self):
-        return reverse('shop-owner', kwargs={'pathname': self.pathname})
+    def get_absolute_url_for_owner(self):
+        return reverse('shop-owner', kwargs={'shop_owner': self.pathname})
+
+    def get_absolute_url_for_customer(self):
+        return reverse('shop-customer', kwargs={'shop_customer': self.pathname})
 
 
 class Editor(models.Model):

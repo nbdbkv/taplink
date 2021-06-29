@@ -12,12 +12,12 @@
 {% block content %}
     <div class="container">
         <div class="shop-header">
-            <a href="{% url 'shop_customer' pathname %}" class="shop-prev">
+            <a href="{{ pathname_context.get_absolute_url_for_owner }}" class="shop-prev">
                 Вернуться назад
             </a>
-            <div class="quantity">
-                <span>1</span>
-            </div>
+{#            <div class="quantity">#}
+{#                <span>1</span>#}
+{#            </div>#}
         </div>
     </div>
     <div class="shop-content">
@@ -25,16 +25,14 @@
             <div>
                 <div class="swiper-container shop-swiper-container">
                     <div class="swiper-wrapper">
-{#                        <div class="swiper-slide">#}
-{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
-{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
-{#                        </div>#}
-                        {% for image in images %}
-                            <div class="swiper-slide">
-                                <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
-                            </div>
-                        {% endfor %}
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                            <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                            <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
                     </div>
                     <div class="swiper-button-prev shop-btn-prev">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,16 +50,14 @@
                 </div>
                 <div class="swiper-container shop-swiper-thumb">
                     <div class="swiper-wrapper">
-{#                        <div class="swiper-slide">#}
-{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
-{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
-{#                        </div>#}
-                        {% for image in images %}
-                            <div class="swiper-slide">
-                                <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
-                            </div>
-                        {% endfor %}
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                            <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">
+                            <img class="shop-inner-img" src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,7 +67,7 @@
                 </h2>
                 <div class="price">
                     <span class="current-price">{{ product.current_price }} сом</span>
-                    <span class="old-price">{{ product.old_price}} сом</span>
+                    <span class="old-price">{{ product.old_price }} сом</span>
                 </div>
                 <p class="text">
                     {{ product.description }}
@@ -82,9 +78,6 @@
                     <div class="tags-item">Лето 2020</div>
                     <div class="tags-item">Лето 2020</div>
                     <div class="tags-item">Лето 2020</div>
-                </div>
-                <div class="add-to-cart">
-                    Добавить в корзину
                 </div>
             </div>
         </div>
