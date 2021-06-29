@@ -12,10 +12,7 @@
     <div class="container">
         <div class="products-header">
             <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
-            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
+            {% include 'components/subnavs.html' %}
         </div>
     </div>
 </div>
@@ -173,6 +170,10 @@
 
     $('.add-prod-btn.delete').on('click', function (){
         $('.collection-itm').remove()
+    })
+
+    $('.collection-itm .delete').on('click', function () {
+        $(this).parent().remove()
     })
 </script>
 {% endblock %}
