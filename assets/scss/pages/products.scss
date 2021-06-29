@@ -26,6 +26,31 @@
     &:last-child {
       margin-right: 0;
     }
+
+    &.add-new-prod {
+      font-size: 13px;
+      line-height: 125%;
+      padding: 8px 16px;
+      background: #505ED4;
+      border-radius: 6px;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      transition: .15s;
+      margin-left: auto;
+
+      &:hover{
+        background: #414a9a;
+      }
+
+      &::after{
+        content: '+';
+        display: block;
+        font-size: 24px;
+        margin-left: 10px;
+        font-weight: 300;
+      }
+    }
   }
 }
 

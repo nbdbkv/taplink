@@ -1,12 +1,8 @@
 from django.urls import path
 
-from apps.templates_app.views import (
-    SignInView, RegistrationView, RegistrationNumberView, ChangePasswordView,
-    RegistrationSubmitView, EditProfileView, ChangeNumberSubmitView,
-    ChangeNumberView, IndexView, ProductsView, ShopView, ShopOwnerView,
-    ShopInnerView, CartView, BoughtProductsView, CollectionView, BuyProductView
-)
-
+from apps.templates_app.views import SignInView, RegistrationView, RegistrationNumberView, ChangePasswordView, \
+    RegistrationSubmitView, EditProfileView, ChangeNumberSubmitView, ChangeNumberView, IndexView, ProductsView, \
+    ShopView, ShopOwnerView, ShopInnerView, CartView, BoughtProductsView, CollectionView, BuyProductView, IndexGuestView
 
 urlpatterns = [
     path('sign-in', SignInView.as_view(), name='sign-in_page'),
@@ -26,4 +22,5 @@ urlpatterns = [
     path('bought-products', BoughtProductsView.as_view(), name='bought-products'),
     path('collection', CollectionView.as_view(), name='collection'),
     path('buy-product', BuyProductView.as_view(), name='buy-product'),
+    path('index-guestt', IndexGuestView.as_view(), name='index-guestt'),
 ]

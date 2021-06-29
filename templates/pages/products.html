@@ -12,10 +12,8 @@
         <div class="container">
             <div class="products-header">
                 <!--        активным link добавить класс active-->
-                <a href="{{ pathname_context.get_absolute_url_for_owner }}" class="link">Перейти в магазин</a>
-                <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-                <a href="{% url 'bought-products' %}" class="link">Купленные товары</a>
-                <a href="{% url 'collection' %}" class="link">Коллекция</a>
+                {% include 'components/subnavs.html' %}
+                <div class="link add-new-prod" data-micromodal-trigger="add-product">Добавить новый товар</div>
             </div>
         </div>
     </div>
