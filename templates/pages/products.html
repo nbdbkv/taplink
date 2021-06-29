@@ -12,10 +12,8 @@
     <div class="container">
         <div class="products-header">
             <!--        актиным link добавить класс active-->
-            <a href="#!" class="link">Перейти в магазин</a>
-            <div class="link" data-micromodal-trigger="add-product">Добавить новый товар</div>
-            <a href="#!" class="link">Купленные товары</a>
-            <a href="#!" class="link">Коллекция</a>
+            {% include 'components/subnavs.html' %}
+            <div class="link add-new-prod" data-micromodal-trigger="add-product">Добавить новый товар</div>
         </div>
     </div>
 </div>

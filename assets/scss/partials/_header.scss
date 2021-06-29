@@ -69,6 +69,11 @@
   border-left: 1px solid #F1F1F1;
   display: flex;
 
+  @include MQ(l-tablet) {
+    padding-left: 16px;
+    margin-left: 16px;
+  }
+
   @include MQ(phone) {
     padding-left: 0;
     border-left: none;
@@ -79,16 +84,18 @@
   .nav-link{
     text-decoration: none;
     display: flex;
-    margin-right: 40px;
+    margin-right: 12px;
+    padding: 7px 32px;
+    border-radius: 6px;
 
-    &:hover{
-      span{
-        border-bottom: 1px solid #8AD9FF;
-      }
+    &:hover,
+    &.active {
+      background: #F5F5F5;
     }
 
     @include MQ(m-tabled) {
       margin-right: 24px;
+      padding: 5px;
       span{
         display: none;
       }
@@ -97,12 +104,6 @@
     span{
       color: #374257;
       margin-left: 6px;
-    }
-
-    &.active{
-      span{
-        border-bottom: 1px solid #8AD9FF;
-      }
     }
 
     &:last-child{

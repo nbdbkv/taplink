@@ -67,3 +67,7 @@ class CollectionView(TemplateView):
 
 class BuyProductView(TemplateView):
     template_name = 'pages/buy-product.html'
+
+
+class IndexGuestView(TemplateView):
+    template_name = 'pages/index-guest.html'
