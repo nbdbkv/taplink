@@ -18,13 +18,13 @@ INSTALLED_APPS = [
 
     # Third party
     'debug_toolbar',
-    'silk',
-    
+
     #Local
     'apps.templates_app',
     'apps.users',
     'apps.taplink',
     'apps.shop',
+    'apps.customer',
     'django_cleanup.apps.CleanupConfig',
 
 ]
@@ -41,7 +41,6 @@ MIDDLEWARE = [
 
     # Third party
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -57,7 +56,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'apps.shop.context_processors.get_pathname',
+                'apps.shop.context_processors.pathname',
+                'apps.shop.context_processors.cart',
             ],
         },
     },
@@ -121,3 +121,10 @@ LOGIN_REDIRECT_URL = 'index_page'
 LOGOUT_REDIRECT_URL = 'index_page'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+CART_SESSION_ID = 'cart'
+
+PAYBOX_MERCHANT_ID = env.int('PAYBOX_MERCHANT_ID')
+PAYBOX_SECRET_KEY = env.str('PAYBOX_SECRET_KEY')
+
+PAYBOX_URL = 'https://api.paybox.money/'

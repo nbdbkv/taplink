@@ -38,36 +38,36 @@ class IndexView(TemplateView):
 
 
 class ProductsView(TemplateView):
-    template_name = 'pages/products.html'
+    template_name = 'pages/shop/products.html'
 
 
 class ShopView(TemplateView):
-    template_name = 'pages/shop.html'
+    template_name = 'pages/customer/shop-customer.html'
 
 
 class ShopOwnerView(TemplateView):
-    template_name = 'pages/shop-owner.html'
+    template_name = 'pages/shop/shop-owner.html'
 
 
 class ShopInnerView(TemplateView):
-    template_name = 'pages/shop-inner.html'
+    template_name = 'pages/customer/product-customer.html'
 
 
 class CartView(TemplateView):
-    template_name = 'pages/cart.html'
+    template_name = 'pages/customer/cart.html'
 
 
 class BoughtProductsView(TemplateView):
-    template_name = 'pages/bought-products.html'
+    template_name = 'pages/shop/bought-products.html'
 
 
 class CollectionView(TemplateView):
-    template_name = 'pages/collection.html'
+    template_name = 'pages/shop/collection.html'
 
 
 class BuyProductView(TemplateView):
-    template_name = 'pages/buy-product.html'
+    template_name = 'pages/customer/buy-product.html'
 
 
 class IndexGuestView(TemplateView):
-    template_name = 'pages/index-guest.html'
+    template_name = 'pages/customer/index-customer.html'

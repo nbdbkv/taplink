@@ -10,25 +10,27 @@
 {% block content %}
     <div class="container">
         <div class="shop-header">
-            <a href="{% url 'products' %}" class="shop-prev">
-                Вернуться назад
+                <a href="{% url 'index-customer'  shop_customer=products.first.owner.pathname %}" class="shop-prev">
+                    Вернуться на главную
+                </a>
+            <a href="{% url 'cart' %}">
+                <div class="quantity">
+                    {% if cart|length > 0 %}
+                        <span>{{ cart|length }}</span>
+                    {% endif %}
+                </div>
             </a>
-{#            <div class="quantity">#}
-{#                <span>1</span>#}
-{#            </div>#}
         </div>
     </div>
     <div class="shop-content">
         <div class="container">
             <div class="shop-content-head">
                 <div class="shop-ava">
-                    {% for item in products %}
-                        {% if item.owner.avatar %}
-                            <img src="{{ item.owner.avatar.url }}" alt="">
+                        {% if products.owner.avatar %}
+                            <img src="{{ products.owner.avatar.url }}" alt="">
                         {% else %}
                             <img src="{% static 'img/jpg/868-536x354.jpg' %}" alt="">
                         {% endif %}
-                    {% endfor %}
                 </div>
                 <h4 class="ava-ttl">
                     Username
@@ -43,20 +45,26 @@
                 <div class="filter-item collections">Коллекции</div>
             </div>
             <div class="shop-grid">
-                {% for item in products %}
+                {% for product in products %}
                     <div class="shop-item">
                         <div class="shop-img-wrap">
                             <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                            <a href="{{ item.get_absolute_url_for_owner }}">
-                                <img src="{{ item.images.first.image.url }}" alt="" class="shop-img">
+                            <a href="{{ product.get_absolute_url_for_customer }}">
+                                <img src="{{ product.images.first.image.url }}" alt="" class="shop-img">
                             </a>
                         </div>
-                        <h3 class="shop-item-ttl">{{ item.name }}</h3>
-                        <h4 class="shop-item-subttl">{{ item.description|truncatechars:70 }}</h4>
+                        <h3 class="shop-item-ttl">{{ product.name|truncatechars:27 }}</h3>
+                        <h4 class="shop-item-subttl">{{ product.description|truncatechars:70 }}</h4>
                         <div class="shop-item-price">
-                            <span class="current-price">{{ item.current_price }} с.</span>
-                            <span class="old-price">{{ item.old_price }} c.</span>
+                            <span class="current-price">{{ product.current_price }} с.</span>
+                            <span class="old-price">{{ product.old_price }} c.</span>
                         </div>
+                        <form action="{% url 'cart_add' slug=product.slug %}" method="post">
+                            {% csrf_token %}
+                            <div class="add-to-cart">
+                                <input type="submit" value="Добавить в корзину">
+                            </div>
+                        </form>
                     </div>
                 {% endfor %}
             </div>
@@ -66,5 +74,7 @@
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+        $('.nav, .header__right').remove()
+    </script>
 {% endblock %}

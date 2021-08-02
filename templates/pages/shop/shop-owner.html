@@ -10,12 +10,9 @@
 {% block content %}
     <div class="container">
         <div class="shop-header">
-{#            <a href="{% url 'products' %}" class="shop-prev">#}
-{#                Вернуться назад#}
-{#            </a>#}
-            <div class="quantity">
-                <span>1</span>
-            </div>
+            <a href="{% url 'products' %}" class="shop-prev">
+                Вернуться назад
+            </a>
         </div>
     </div>
     <div class="shop-content">
@@ -47,7 +44,7 @@
                     <div class="shop-item">
                         <div class="shop-img-wrap">
                             <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                            <a href="{{ product.get_absolute_url_for_owner }}">
+                            <a href="{{ item.get_absolute_url_for_owner }}">
                                 <img src="{{ item.images.first.image.url }}" alt="" class="shop-img">
                             </a>
                         </div>
@@ -56,9 +53,6 @@
                         <div class="shop-item-price">
                             <span class="current-price">{{ item.current_price }} с.</span>
                             <span class="old-price">{{ item.old_price }} c.</span>
-                        </div>
-                        <div class="add-to-cart">
-                            Добавить в корзину
                         </div>
                     </div>
                 {% endfor %}
@@ -69,7 +63,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        $('.nav, .header__right').remove()
-    </script>
+
 {% endblock %}

@@ -1,4 +1,5 @@
 <a href="{% url 'products' %}" class="link">Товары</a>
-<a href="{{ pathname_context.get_absolute_url_for_owner }}" class="link">Перейти в магазин</a>
+{#<a href="#" class="link">Перейти в магазин</a>#}
+<a href="{% url 'shop-owner' shop_owner=pathname_context %}" class="link">Перейти в магазин</a>
 <a href="{% url 'bought-products' %}" class="link">Купленные товары</a>
 <a href="{% url 'collection' %}" class="link">Коллекция</a>

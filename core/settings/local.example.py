@@ -2,9 +2,9 @@ import environ
 env = environ.Env()
 
 
-SECRET_KEY = env.str('DJANGO_SECRET_KEY', default='not secret)')
+SECRET_KEY = env.str('SECRET_KEY', default='not secret)')
 
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
+DEBUG = env.bool('DEBUG', default=True)
 
 DATABASES = {
     'default': env.db(
@@ -12,4 +12,4 @@ DATABASES = {
     )
 }
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])

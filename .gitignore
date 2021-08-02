@@ -259,6 +259,7 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+.setup.cfg
 
 .envs/.env.local
 core/settings/local.py

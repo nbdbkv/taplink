@@ -12,12 +12,16 @@
 {% block content %}
     <div class="container">
         <div class="shop-header">
-            <a href="{% url 'shop_customer' pathname %}" class="shop-prev">
-                Вернуться назад
+            <a href="{% url 'index-customer'  shop_customer=product.owner.pathname %}" class="shop-prev">
+                Вернуться на главную
             </a>
-            <div class="quantity">
-                <span>1</span>
-            </div>
+            <a href="{% url 'cart' %}">
+                <div class="quantity">
+                    {% if cart|length > 0 %}
+                        <span>{{ cart|length }}</span>
+                    {% endif %}
+                </div>
+            </a>
         </div>
     </div>
     <div class="shop-content">
@@ -25,14 +29,10 @@
             <div>
                 <div class="swiper-container shop-swiper-container">
                     <div class="swiper-wrapper">
-{#                        <div class="swiper-slide">#}
-{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
-{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
-{#                        </div>#}
                         {% for image in images %}
                             <div class="swiper-slide">
                                 <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
+                                <img class="shop-inner-img" src="{{ image.image.url }}" alt="">
                             </div>
                         {% endfor %}
                     </div>
@@ -52,14 +52,10 @@
                 </div>
                 <div class="swiper-container shop-swiper-thumb">
                     <div class="swiper-wrapper">
-{#                        <div class="swiper-slide">#}
-{#                            <img src="{% static 'img/icon/default-image.svg' %}" alt="">#}
-{#                            <img class="shop-inner-img" src="{{ product.main_image.url }}" alt="">#}
-{#                        </div>#}
                         {% for image in images %}
                             <div class="swiper-slide">
                                 <img src="{% static 'img/icon/default-image.svg' %}" alt="">
-                                <img class="shop-inner-img" src="{{ image.images.url }}" alt="">
+                                <img class="shop-inner-img" src="{{ image.image.url }}" alt="">
                             </div>
                         {% endfor %}
                     </div>
@@ -78,14 +74,16 @@
                 </p>
                 <h4>Коллекция</h4>
                 <div class="tags-flex">
-                    <div class="tags-item">Лето 2020</div>
-                    <div class="tags-item">Лето 2020</div>
-                    <div class="tags-item">Лето 2020</div>
-                    <div class="tags-item">Лето 2020</div>
+                    {% for collection in product.collections.all %}
+                        <div class="tags-item">{{ collection }}</div>
+                    {% endfor %}
                 </div>
-                <div class="add-to-cart">
-                    Добавить в корзину
-                </div>
+                <form action="{% url 'cart_add' slug=product.slug %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">
+                        Добавить в корзину
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -124,5 +122,6 @@
                 swiper: swiperThumb,
             },
         });
+        $('.nav, .header__right').remove()
     </script>
 {% endblock %}

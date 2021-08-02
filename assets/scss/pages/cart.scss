@@ -278,6 +278,8 @@
     background: #505ED4;
     border-radius: 6px;
     cursor: pointer;
+    text-decoration: none;
+    display: block;
 
     @include MQ(m-desctop) {
       max-width: 250px;

@@ -6,8 +6,7 @@ from .models import Collection, Product, ProductImage
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 'description', 'old_price', 'current_price', 'quantity',
-        'is_available', 'created', 'owner'
+        'name', 'description', 'old_price', 'current_price', 'quantity', 'is_available', 'created', 'owner'
     )
 
 
