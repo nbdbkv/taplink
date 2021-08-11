@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, ListView, DetailView, DeleteView
@@ -22,12 +22,12 @@ class ProductsView(LoginRequiredMixin, ListView):
                 Q(name__icontains=self.request.GET.get('search')) &
                 Q(owner__user=self.request.user) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('collections')
         else:
             return Product.objects.filter(
                 Q(owner__user=self.request.user) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('collections')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,6 +71,7 @@ class BoughtProductsView(LoginRequiredMixin, ListView):
     template_name = 'pages/shop/bought-products.html'
     context_object_name = 'ordered_items'
     paginate_by = 8
+    queryset = OrderItem.objects.select_related('order', 'product')
 
 
 class CollectionView(LoginRequiredMixin, ListView):
@@ -79,7 +80,8 @@ class CollectionView(LoginRequiredMixin, ListView):
     context_object_name = 'collections'
 
     def get_queryset(self):
-        return Collection.objects.filter(products__owner__user=self.request.user).distinct()
+        return Collection.objects.filter(products__owner__user=self.request.user)\
+            .annotate(products_per_collection=Count('products'))
 
 
 class ProductOwnerView(DetailView):
@@ -105,9 +107,9 @@ class ShopOwnerView(LoginRequiredMixin, ListView):
                 Q(name__icontains=self.request.GET.get('search')) &
                 Q(owner__user=self.request.user) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('images').select_related('owner')
         else:
             return Product.objects.filter(
                 Q(owner__user=self.request.user) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('images').select_related('owner')

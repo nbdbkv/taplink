@@ -8,11 +8,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('', include('apps.users.urls')),
     path('', include('apps.taplink.urls')),
     path('customer/', include('apps.customer.urls')),
     path('', include('apps.shop.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
+
 ]
 
 if settings.DEBUG:

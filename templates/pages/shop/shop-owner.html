@@ -45,7 +45,7 @@
                         <div class="shop-img-wrap">
                             <img src="{% static 'img/icon/default-image.svg' %}" alt="">
                             <a href="{{ item.get_absolute_url_for_owner }}">
-                                <img src="{{ item.images.first.image.url }}" alt="" class="shop-img">
+                                <img src="{{ item.images.all.0.image.url }}" alt="" class="shop-img">
                             </a>
                         </div>
                         <h3 class="shop-item-ttl">{{ item.name }}</h3>

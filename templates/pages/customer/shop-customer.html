@@ -50,7 +50,7 @@
                         <div class="shop-img-wrap">
                             <img src="{% static 'img/icon/default-image.svg' %}" alt="">
                             <a href="{{ product.get_absolute_url_for_customer }}">
-                                <img src="{{ product.images.first.image.url }}" alt="" class="shop-img">
+                                <img src="{{ product.images.all.0.image.url }}" alt="" class="shop-img">
                             </a>
                         </div>
                         <h3 class="shop-item-ttl">{{ product.name|truncatechars:27 }}</h3>

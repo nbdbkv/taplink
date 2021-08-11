@@ -19,14 +19,13 @@ INSTALLED_APPS = [
     # Third party
     'debug_toolbar',
 
-    #Local
+    # Local
     'apps.templates_app',
     'apps.users',
     'apps.taplink',
     'apps.shop',
     'apps.customer',
     'django_cleanup.apps.CleanupConfig',
-
 ]
 
 MIDDLEWARE = [

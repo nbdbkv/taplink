@@ -21,8 +21,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context['editor_form'] = EditorForm
         context['avatar_form'] = AvatarForm
         context['messenger_form'] = MessengerForm
-        context['taplink'] = TapLink.objects.filter(user=self.request.user)\
-            .prefetch_related('messengers').prefetch_related('editors')
+        context['taplink'] = TapLink.objects.filter(user=self.request.user).prefetch_related('messengers', 'editors')
         return context
 
 

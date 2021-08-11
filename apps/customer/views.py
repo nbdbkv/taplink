@@ -29,7 +29,7 @@ class IndexCustomerView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['taplink'] = TapLink.objects.filter(pathname=self.kwargs['shop_customer'])\
-            .prefetch_related('messengers').prefetch_related('editors')
+            .prefetch_related('messengers', 'editors')
         return context
 
 
@@ -44,12 +44,12 @@ class ShopCustomerView(ListView):
                 Q(name__icontains=self.request.GET.get('search')) &
                 Q(owner__pathname=self.kwargs['shop_customer']) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('images').select_related('owner')
         else:
             return Product.objects.filter(
                 Q(owner__pathname=self.kwargs['shop_customer']) &
                 Q(is_available=True)
-            )
+            ).prefetch_related('images').select_related('owner')
 
 
 class ProductCustomerView(DetailView):

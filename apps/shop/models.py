@@ -67,7 +67,7 @@ class ProductImage(models.Model):
     """Model for creating an Image object for Product model."""
     image = models.ImageField(upload_to=image_upload_to, blank=True, verbose_name='Image')
     product = models.ForeignKey(
-        to=Product, on_delete=models.CASCADE, null=True, blank=True,related_name='images', verbose_name='Products'
+        to=Product, on_delete=models.CASCADE, null=True, blank=True, related_name='images', verbose_name='Products'
     )
 
     def __str__(self):
