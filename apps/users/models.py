@@ -10,13 +10,17 @@ class CustomUser(AbstractUser):
     username = None
     email = None
     phone_number = models.CharField(
-        _('Phone number'), unique=True, max_length=20
+        _('Мобильный номер'), unique=True, max_length=20
     )
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
     def __str__(self):
         return self.phone_number

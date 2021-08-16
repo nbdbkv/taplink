@@ -1,8 +1,12 @@
 from django.urls import path
 
-from apps.templates_app.views import SignInView, RegistrationView, RegistrationNumberView, ChangePasswordView, \
-    RegistrationSubmitView, EditProfileView, ChangeNumberSubmitView, ChangeNumberView, IndexView, ProductsView, \
-    ShopView, ShopOwnerView, ShopInnerView, CartView, BoughtProductsView, CollectionView, BuyProductView, IndexGuestView
+from apps.templates_app.views import (
+    SignInView, RegistrationView, RegistrationNumberView, ChangePasswordView,
+    RegistrationSubmitView, EditProfileView, ChangeNumberSubmitView,
+    ChangeNumberView, IndexView, ProductsView, ShopView, ShopOwnerView,
+    ShopInnerView, CartView, BoughtProductsView, CollectionView, BuyProductView,
+    IndexGuestView
+)
 
 urlpatterns = [
     path('sign-in', SignInView.as_view(), name='sign-in_page'),

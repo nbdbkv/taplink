@@ -28,8 +28,9 @@ class IndexCustomerView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['taplink'] = TapLink.objects.filter(pathname=self.kwargs['shop_customer'])\
-            .prefetch_related('messengers', 'editors')
+        context['taplink'] = TapLink.objects.filter(
+            pathname=self.kwargs['shop_customer']
+        ).prefetch_related('messengers', 'editors')
         return context
 
 
@@ -70,7 +71,6 @@ class ProductAddToCartView(View):
         slug = kwargs.get('slug')
         product = get_object_or_404(Product, slug=slug, is_available=True)
         cart.add(product=product)
-        print(request, args, kwargs)
         return redirect(product.owner.get_absolute_url_for_customer())
 
 
@@ -118,8 +118,11 @@ class OrderFormView(FormView):
         order_items = []
         for item in cart:
             order_item = OrderItem(
-                product_owner=item['product'].owner, order=order, product=item['product'],
-                price=item['price'], quantity=item['quantity']
+                product_owner=item['product'].owner,
+                order=order,
+                product=item['product'],
+                price=item['price'],
+                quantity=item['quantity']
             )
             order_items.append(order_item)
             product = item['product']
@@ -130,10 +133,15 @@ class OrderFormView(FormView):
         OrderItem.objects.bulk_create(order_items)
         cart.clear()
         if order.payment_method == CASH:
-            messages.add_message(self.request, messages.INFO, 'Thank you for your purchase!')
+            messages.add_message(
+                self.request,
+                messages.INFO,
+                'Спасибо за Вашу покупку!')
             return redirect('cart')
         elif order.payment_method == ONLINE:
-            response = requests.get(paybox_service.get_payment_body(order, self.request))
+            response = requests.get(
+                paybox_service.get_payment_body(order, self.request)
+            )
             root = ET.fromstring(response.text)
             payment_url = root.find('pg_redirect_url').text
             return redirect(payment_url)
@@ -145,9 +153,11 @@ class GetPaymentResponse(View):
         result = request.GET.get('pg_result')
         order_id = request.GET.get('pg_order_id')
         if not order_id:
-            raise PermissionDenied('Order is not found')
+            raise PermissionDenied('Заказ не найден')
         if result:
             order = Order.objects.filter(id=order_id).update(is_paid=True)
         else:
-            logger.warning(f'Something went wrong. Please check the {order_id} order')
+            logger.warning(
+                f'Что-то пошло не так. Пожалуйста, проверьте заказ {order_id}'
+            )
         return HttpResponse(result)

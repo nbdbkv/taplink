@@ -34,7 +34,9 @@ class PayboxPaymentService:
 
     def get_payment_body(self, order, request):
         pg_result_url = str(request.build_absolute_uri())
-        pg_result_url = pg_result_url.replace(request.path_info, str(reverse_lazy('get_payment_response')))
+        pg_result_url = pg_result_url.replace(
+            request.path_info, str(reverse_lazy('get_payment_response'))
+        )
         pg_success_url = request.build_absolute_uri(reverse('cart'))
         merchant_id, secret_key = self.get_merchant_id_and_secret_key()
         pg_salt = self.get_salt()

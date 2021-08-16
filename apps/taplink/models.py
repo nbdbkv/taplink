@@ -11,17 +11,20 @@ CustomUser = get_user_model()
 
 class TapLink(models.Model):
     pathname = models.SlugField(
-        max_length=50, unique=True, null=True, blank=True,
-        verbose_name='Pathname'
+        max_length=50, unique=True, null=True, blank=True, verbose_name='Путь'
     )
     avatar = models.ImageField(
         upload_to=image_upload_to, null=True, blank=True,
-        verbose_name='Avatar'
+        verbose_name='Аватарка'
     )
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, related_name='taplink',
-        verbose_name='User'
+        verbose_name='Пользователь'
     )
+
+    class Meta:
+        verbose_name = 'Таплинк'
+        verbose_name_plural = 'Таплинк'
 
     def __str__(self):
         return str(self.user)
@@ -37,8 +40,12 @@ class Editor(models.Model):
     editor = models.TextField(verbose_name='Editor')
     taplink = models.ForeignKey(
         to=TapLink, on_delete=models.CASCADE, related_name='editors',
-        verbose_name='TapLink'
+        verbose_name='Таплинк'
     )
+
+    class Meta:
+        verbose_name = 'Редактор'
+        verbose_name_plural = 'Редакторы'
 
     def __str__(self):
         return self.editor
@@ -49,18 +56,22 @@ class Messenger(models.Model):
         max_length=50, null=True, blank=True, verbose_name='Telegram'
     )
     title_t = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='Telegram title'
+        max_length=50, null=True, blank=True, verbose_name='Название Telegram'
     )
     whatsapp = models.CharField(
         max_length=50, null=True, blank=True, verbose_name='WhatsApp'
     )
     title_wa = models.CharField(
-        max_length=50, null=True, blank=True, verbose_name='WhatsApp title'
+        max_length=50, null=True, blank=True, verbose_name='Название WhatsApp'
     )
     taplink = models.ForeignKey(
         to=TapLink, on_delete=models.CASCADE, related_name='messengers',
         verbose_name='TapLink',
     )
+
+    class Meta:
+        verbose_name = 'Мессенджер'
+        verbose_name_plural = 'Мессенджеры'
 
     def __str__(self):
         if self.telegram and self.whatsapp:

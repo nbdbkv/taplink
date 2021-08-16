@@ -18,7 +18,10 @@ class Cart(object):
         """Add a product to the cart or update its quantity."""
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.current_price)}
+            self.cart[product_id] = {
+                'quantity': 0,
+                'price': str(product.current_price)
+            }
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
@@ -51,7 +54,10 @@ class Cart(object):
             self.save()
 
     def __iter__(self):
-        """Iterate over the items in the cart and get the products from the database."""
+        """
+        Iterate over the items in the cart and get the products
+        from the database.
+        """
         product_ids = self.cart.keys()
         # get the product objects and add them to the cart
         products = Product.objects.filter(id__in=product_ids)
@@ -73,7 +79,10 @@ class Cart(object):
 
     def get_total_price(self):
         """Count total price of all items in the cart."""
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum(
+            Decimal(item['price']) * item['quantity']
+            for item in self.cart.values()
+        )
 
     def clear(self):
         """Remove cart from session."""

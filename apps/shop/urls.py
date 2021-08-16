@@ -1,8 +1,8 @@
 from django.urls import path
 
 from apps.shop.views import (
-    ProductsView, ProductAddFormView, ProductDeleteView, BoughtProductsView, CollectionView, ProductOwnerView,
-    ShopOwnerView, add_collection_with_ajax
+    ProductsView, ProductAddFormView, ProductDeleteView, BoughtProductsView,
+    CollectionView, ProductOwnerView, ShopOwnerView, add_collection_with_ajax
 )
 
 

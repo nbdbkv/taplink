@@ -1,8 +1,9 @@
 from django.urls import path
 
 from apps.customer.views import (
-    OrderFormView, CartView, ProductCustomerView, ShopCustomerView, IndexCustomerView, ProductAddToCartView,
-    ProductIncreaseView, ProductDecreaseView, ProductRemoveFromCartView, GetPaymentResponse
+    OrderFormView, CartView, ProductCustomerView, ShopCustomerView,
+    IndexCustomerView, ProductAddToCartView, ProductIncreaseView,
+    ProductDecreaseView, ProductRemoveFromCartView, GetPaymentResponse
 )
 
 

@@ -100,7 +100,7 @@
                                 {% for messenger in item.messengers.all %}
                                     {% if messenger.telegram %}
                                         <div class="d-flex">
-                                            <a href="https://t.me/{{ messenger.telegram }}" class="taplink__social-link taplink__telegram">
+                                            <a data-micromodal-trigger="modal-messenger" class="taplink__social-link taplink__telegram">
                                                 {% if messenger.title_t %}
                                                     {{ messenger.title_t }}
                                                 {% else %}
@@ -125,7 +125,7 @@
                                 {% for messenger in item.messengers.all %}
                                     {% if messenger.whatsapp %}
                                         <div class="d-flex">
-                                            <a href="https://wa.me/{{ messenger.whatsapp }}" class="taplink__social-link taplink__whatsapp">
+                                            <a data-micromodal-trigger="modal-messenger" class="taplink__social-link taplink__whatsapp">
                                                 {% if messenger.title_wa %}
                                                     {{ messenger.title_wa }}
                                                 {% else %}

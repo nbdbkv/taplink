@@ -33,8 +33,12 @@ class ProductsView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['product_form'] = ProductForm
         context['image_form'] = ProductImageForm
-        context['collections'] = Collection.objects.filter(products__owner__user=self.request.user).distinct()
-        context['pathname'] = TapLink.objects.get(user=self.request.user).pathname
+        context['collections'] = Collection.objects.filter(
+            products__owner__user=self.request.user
+        ).distinct()
+        context['pathname'] = TapLink.objects.get(
+            user=self.request.user
+        ).pathname
         return context
 
 
@@ -48,7 +52,9 @@ class ProductAddFormView(LoginRequiredMixin, FormView):
         product.save()
         for image in self.request.FILES.getlist('images'):
             ProductImage.objects.create(image=image, product=product)
-        product.collections.set(list(Collection.objects.filter(name__in=form.data['collections'].split(','))))
+        product.collections.set(list(Collection.objects.filter(
+            name__in=form.data['collections'].split(',')))
+        )
         return redirect('products')
 
 
@@ -80,8 +86,9 @@ class CollectionView(LoginRequiredMixin, ListView):
     context_object_name = 'collections'
 
     def get_queryset(self):
-        return Collection.objects.filter(products__owner__user=self.request.user)\
-            .annotate(products_per_collection=Count('products'))
+        return Collection.objects.filter(
+            products__owner__user=self.request.user
+        ).annotate(products_per_collection=Count('products'))
 
 
 class ProductOwnerView(DetailView):

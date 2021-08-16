@@ -41,7 +41,9 @@ class ChangeNumberFormView(LoginRequiredMixin, FormView):
 def validate_phone_number(request):
     phone_number = request.GET.get('phone_number', None)
     data = {
-        'is_taken': CustomUser.objects.filter(phone_number__iexact=phone_number).exists()
+        'is_taken': CustomUser.objects.filter(
+            phone_number__iexact=phone_number
+        ).exists()
     }
     return JsonResponse(data)
 
